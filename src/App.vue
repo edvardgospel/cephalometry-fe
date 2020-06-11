@@ -1,28 +1,46 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <NavigationBar />
+    <CephalometryGenerator />
+    <Footer :author="author" :email="email" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NavigationBar from "./components/NavigationBar.vue";
+import CephalometryGenerator from "./components/CephalometryGenerator.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    NavigationBar,
+    CephalometryGenerator,
+    Footer
+  },
+  data() {
+    return {
+      author: "Edvard Eros",
+      email: "edvard.eros@yahoo.com"
+    };
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+}
+
+#app {
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 </style>

@@ -3,13 +3,12 @@
     <div class="inner-cephalometry-div">
       <div class="content-div">
         <div class="photo-div" :class="{'photo-div-active': cephalometricImage.length > 0}">
-          <div class="image-div" v-show="cephalometricImage.length > 0">
+          <div class="image-div" id="image-div-id" v-show="cephalometricImage.length > 0">
             <img
               class="image-img"
-              id="image-img-id"
               :src="cephalometricImage"
-              @click="imageClicked()"
-              ref="imageHtml"
+              :class="{'image-img-unclickable': cephalometricPoints.length === index}"
+              @click="clickImage"
             />
           </div>
           <div class="file-div">
@@ -27,8 +26,10 @@
         </div>
         <div class="elements-div">
           <div class="labels-div">
-            <span class="cephalometric-point-span">{{cephalometricPoints[index]}}</span>
-            <span class="reset-points-span" @click="index = 0">Reset points</span>
+            <span
+              class="cephalometric-point-span"
+            >{{cephalometricPoints[index] ? cephalometricPoints[index] : "&#10003;"}}</span>
+            <span class="reset-points-span" @click="removeDots">Reset points</span>
             <span class="reset-image-span" @click="removeImage">Reset image</span>
           </div>
           <div class="button-div">
@@ -89,7 +90,39 @@ export default {
       }
     },
     removeImage() {
+      this.removeDots();
       this.cephalometricImage = "";
+    },
+    clickImage(event) {
+      this.incerementIndex();
+      this.addDot(event);
+      this.saveCoordinates(event);
+    },
+    incerementIndex() {
+      this.index += 1;
+    },
+    addDot(event) {
+      var div = document.createElement("div");
+      div.className = "image-dot-div";
+      div.style.position = "absolute";
+      div.style.top = event.offsetY + "px";
+      div.style.left = event.offsetX + "px";
+      div.style.width = "2px";
+      div.style.height = "2px";
+      div.style.backgroundColor = "yellow";
+      document.getElementById("image-div-id").appendChild(div);
+    },
+    saveCoordinates(event) {
+      let mouseX = event.offsetX;
+      let mouseY = event.offsetY;
+      console.log(mouseX + " " + mouseY);
+    },
+    removeDots() {
+      this.index = 0;
+      var paras = document.getElementsByClassName("image-dot-div");
+      while (paras[0]) {
+        paras[0].parentNode.removeChild(paras[0]);
+      }
     }
   }
 };
@@ -139,6 +172,10 @@ export default {
 .image-img {
   position: relative;
   width: 100%;
+}
+
+.image-img-unclickable {
+  pointer-events: none;
 }
 
 .image-img:hover {
@@ -192,6 +229,9 @@ label:hover {
   padding-left: 5px;
   margin-right: 5px;
   cursor: default;
+  display: inline-block;
+  text-align: center;
+  width: 20px;
 }
 
 .reset-points-span {

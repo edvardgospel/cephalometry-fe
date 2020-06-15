@@ -1,41 +1,40 @@
 <template>
-  <div class="cephalometry-div">
-    <div class="inner-cephalometry-div">
-      <div class="content-div">
-        <div class="photo-div" :class="{'photo-div-active': cephalometricImage.length > 0}">
-          <div class="image-div" id="image-div-id" v-show="cephalometricImage.length > 0">
-            <img
-              class="image-img"
-              :src="cephalometricImage"
-              :class="{'image-img-unclickable': cephalometricPoints.length === index}"
-              @click="clickImage"
-            />
-          </div>
-          <div class="file-div">
-            <input
-              class="file-upload-input"
-              type="file"
-              id="file"
-              @change="previewImage"
-              accept="image/*"
-            />
-            <div class="label-div">
-              <label for="file">Choose a file</label>
-            </div>
-          </div>
+  <div class="content-div">
+    <div class="image-div" :class="{'image-div-remove-border': cephalometricImage.length > 0}">
+      <div class="inner-image-div" id="inner-image-div-id" v-show="cephalometricImage.length > 0">
+        <img
+          class="image-img"
+          :class="{'image-img-unclickable': cephalometricPoints.length === index}"
+          :src="cephalometricImage"
+          @click="clickImage"
+        />
+      </div>
+      <div class="file-upload-div">
+        <input
+          class="file-upload-input"
+          id="file-upload-input-id"
+          type="file"
+          accept="image/*"
+          @change="uploadImage"
+        />
+        <div class="file-upload-label-div">
+          <label class="file-upload-label" for="file-upload-input-id">Choose a file</label>
         </div>
-        <div class="elements-div">
-          <div class="labels-div">
-            <span
-              class="cephalometric-point-span"
-            >{{cephalometricPoints[index] ? cephalometricPoints[index] : "&#10003;"}}</span>
-            <span class="reset-points-span" @click="removeDots">Reset points</span>
-            <span class="reset-image-span" @click="removeImage">Reset image</span>
-          </div>
-          <div class="button-div">
-            <button v-show="cephalometricPoints.length === index" class="generate-button">Generate</button>
-          </div>
-        </div>
+      </div>
+    </div>
+    <div class="meta-elements-div">
+      <div class="meta-elements-labels-div">
+        <span
+          class="actual-cephalometric-point-span"
+        >{{cephalometricPoints[index] ? cephalometricPoints[index] : "&#10003;"}}</span>
+        <span class="reset-points-span" @click="removeDots">Reset points</span>
+        <span class="reset-image-span" @click="removeImage">Reset image</span>
+      </div>
+      <div class="generate-button-div">
+        <button
+          class="generate-button-unclickable"
+          :class="{'generate-button-clickable': cephalometricPoints.length === index}"
+        >Generate</button>
       </div>
     </div>
   </div>
@@ -72,20 +71,13 @@ export default {
     };
   },
   methods: {
-    previewImage(event) {
-      // Reference to the DOM input element
-      var input = event.target;
-      // Ensure that you have a file before attempting to read it
+    uploadImage(event) {
+      var input = event.target; // Reference to the DOM input element
       if (input.files && input.files[0]) {
-        // create a new FileReader to read this image and convert to base64 format
         var reader = new FileReader();
-        // Define a callback function to run, when FileReader finishes its job
         reader.onload = e => {
-          // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
-          // Read image as base64 and set to imageData
-          this.cephalometricImage = e.target.result;
+          this.cephalometricImage = e.target.result; // Callback, when FileReader finishes its job
         };
-        // Start the reader job - read file as a data url (base64 format)
         reader.readAsDataURL(input.files[0]);
       }
     },
@@ -110,7 +102,8 @@ export default {
       div.style.width = "2px";
       div.style.height = "2px";
       div.style.backgroundColor = "yellow";
-      document.getElementById("image-div-id").appendChild(div);
+      div.style.cursor = "crosshair";
+      document.getElementById("inner-image-div-id").appendChild(div);
     },
     saveCoordinates(event) {
       let mouseX = event.offsetX;
@@ -129,28 +122,13 @@ export default {
 </script>
 
 <style scoped>
-.cephalometry-div {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  padding-bottom: 2rem;
-}
-
-.inner-cephalometry-div {
-  position: relative;
-  height: 100%;
-  width: 85rem;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
 .content-div {
   height: 100%;
   width: 55%;
   margin: 1rem auto;
 }
 
-.photo-div {
+.image-div {
   position: relative;
   height: 90%;
   width: 100%;
@@ -159,11 +137,11 @@ export default {
   border: 1px solid #dddddd;
 }
 
-.photo-div-active {
+.image-div-remove-border {
   border: none;
 }
 
-.image-div {
+.inner-image-div {
   position: relative;
   height: 100%;
   width: 100%;
@@ -172,26 +150,23 @@ export default {
 .image-img {
   position: relative;
   width: 100%;
+  cursor: crosshair;
 }
 
 .image-img-unclickable {
   pointer-events: none;
 }
 
-.image-img:hover {
-  cursor: crosshair; /* "hand" cursor */
-}
-
-.file-div {
+.file-upload-div {
   position: relative;
   height: 7rem;
   width: 50%;
-  margin: 37% auto;
+  margin: 30% auto;
   border: 1px dashed #dddddd;
   text-align: center;
 }
 
-.label-div {
+.file-upload-label-div {
   margin: 11% auto;
 }
 
@@ -199,75 +174,86 @@ export default {
   display: none;
 }
 
-label {
-  font-size: 1.5em;
+.file-upload-label {
+  font-size: 1.4em;
   cursor: pointer; /* "hand" cursor */
   border-radius: 5px;
 }
 
-label:hover {
+.file-upload-label:hover {
   background-color: #f5f5f5;
   border-color: #f5f5f5;
 }
 
-.elements-div {
+.meta-elements-div {
   position: relative;
   height: 100%;
   width: 100%;
   margin: 0 auto;
 }
 
-.labels-div {
+.meta-elements-labels-div {
   float: left;
   margin: 5px auto auto 5px;
 }
 
-.cephalometric-point-span {
+.actual-cephalometric-point-span,
+.reset-points-span,
+.reset-image-span {
   border: 1px solid #dddddd;
   border-radius: 5px;
   padding-right: 5px;
   padding-left: 5px;
+}
+
+.actual-cephalometric-point-span,
+.reset-points-span {
   margin-right: 5px;
+}
+
+.reset-points-span,
+.reset-image-span {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.actual-cephalometric-point-span {
   cursor: default;
   display: inline-block;
   text-align: center;
   width: 20px;
 }
 
-.reset-points-span {
-  border: 1px solid #dddddd;
-  border-radius: 5px;
-  padding-right: 5px;
-  padding-left: 5px;
-  margin-left: 5px;
-  margin-right: 5px;
-  cursor: pointer; /* "hand" cursor */
-}
-
-.reset-image-span {
-  border: 1px solid #dddddd;
-  border-radius: 5px;
-  padding-right: 5px;
-  padding-left: 5px;
-  margin-left: 5px;
-  cursor: pointer; /* "hand" cursor */
-}
-
-.button-div {
+.generate-button-div {
   float: right;
 }
 
-.generate-button {
+.generate-button-unclickable,
+.generate-button-clickable {
   font-size: 1.5em;
   background-color: #ffffff;
   border: 1px solid #dddddd;
-  cursor: pointer; /* "hand" cursor */
   border-radius: 5px;
   font-family: inherit;
+}
+
+.generate-button-unclickable {
+  cursor: not-allowed;
+  color: lightgray;
+}
+
+.generate-button-unclickable:hover {
+  color: #ffcccb;
+  border-color: #ffcccb;
+}
+
+.generate-button-clickable {
+  cursor: pointer;
   color: inherit;
 }
 
-.generate-button:hover {
+.generate-button-clickable:hover {
+  color: inherit;
   background-color: #f5f5f5;
   border-color: #f5f5f5;
 }

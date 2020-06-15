@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <NavigationBar />
-    <CephalometryGenerator />
+    <div class="cephalometry-div">
+      <div class="inner-cephalometry-div">
+        <CephalometryGenerator />
+      </div>
+    </div>
     <Footer :author="author" :email="email" />
   </div>
 </template>
@@ -42,5 +46,20 @@ body {
   position: absolute;
   height: 100%;
   width: 100%;
+}
+
+.cephalometry-div {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 2rem;
+}
+
+.inner-cephalometry-div {
+  position: relative;
+  height: 100%;
+  width: 85rem;
+  margin: 0 auto;
+  overflow: hidden;
 }
 </style>

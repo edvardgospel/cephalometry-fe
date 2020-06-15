@@ -32,10 +32,11 @@ export default {
 </script>
 
 <style>
-body {
+html, body {
   height: 100%;
   width: 100%;
-  margin: 0rem;
+  margin: 0px;
+  padding: 0px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;

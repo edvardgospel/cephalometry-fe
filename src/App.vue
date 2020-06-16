@@ -41,11 +41,12 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 #app {
-  position: absolute;
-  height: 100%;
+  position: relative;
+  height: 45rem;
   width: 100%;
 }
 
@@ -59,7 +60,7 @@ html, body {
 .inner-cephalometry-div {
   position: relative;
   height: 100%;
-  width: 85rem;
+  max-width: 85rem;
   margin: 0 auto;
   overflow: hidden;
 }

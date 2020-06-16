@@ -38,6 +38,6 @@ footer {
 
 .inner-footer-div {
   float: left;
-  margin: 1rem auto auto 5px;
+  margin: 1rem auto auto 1rem;
 }
 </style>

@@ -25,14 +25,12 @@ export default {
   width: 85rem;
   margin: 0 auto;
   position: relative;
-
 }
 
 .logo-div {
-  padding-left: 0.5rem;
+  padding-left: 1rem;
   top: 25%;
   font-size: 1.5rem;
   position: absolute;
-
 }
 </style>

@@ -124,7 +124,7 @@ export default {
 <style scoped>
 .content-div {
   height: 100%;
-  width: 55%;
+  width: 40rem;
   margin: 1rem auto;
 }
 
@@ -226,6 +226,7 @@ export default {
 
 .generate-button-div {
   float: right;
+  margin: 3px auto auto 5px;
 }
 
 .generate-button-unclickable,

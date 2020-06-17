@@ -3,7 +3,8 @@
     <NavigationBar />
     <div class="cephalometry-div">
       <div class="inner-cephalometry-div">
-        <CephalometryGenerator />
+        <!--<CephalometryGenerator />-->
+        <CephalometryForm />
       </div>
     </div>
     <Footer :author="author" :email="email" />
@@ -12,14 +13,16 @@
 
 <script>
 import NavigationBar from "./components/NavigationBar.vue";
-import CephalometryGenerator from "./components/CephalometryGenerator.vue";
+//import CephalometryGenerator from "./components/CephalometryGenerator.vue";
+import CephalometryForm from "./components/CephalometryForm.vue";
 import Footer from "./components/Footer.vue";
 
 export default {
   name: "App",
   components: {
     NavigationBar,
-    CephalometryGenerator,
+    //CephalometryGenerator,
+    CephalometryForm,
     Footer
   },
   data() {
@@ -32,7 +35,8 @@ export default {
 </script>
 
 <style>
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   margin: 0px;

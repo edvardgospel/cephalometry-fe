@@ -176,7 +176,7 @@ export default {
 
 .file-upload-label {
   font-size: 1.4em;
-  cursor: pointer; /* "hand" cursor */
+  cursor: pointer;
   border-radius: 5px;
 }
 
@@ -236,6 +236,7 @@ export default {
   border: 1px solid #dddddd;
   border-radius: 5px;
   font-family: inherit;
+  /*color: inherit;*/
 }
 
 .generate-button-unclickable {

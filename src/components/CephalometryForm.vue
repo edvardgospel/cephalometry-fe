@@ -101,7 +101,7 @@ form {
   position: relative;
   height: 100%;
   width: 80%;
-  margin: 1rem auto;
+  margin: 3rem auto;
 }
 
 .form-input,

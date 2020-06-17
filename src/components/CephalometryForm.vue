@@ -100,7 +100,7 @@ form {
 .inner-form-div {
   position: relative;
   height: 100%;
-  width: 80%;
+  width: 60%;
   margin: 3rem auto;
 }
 

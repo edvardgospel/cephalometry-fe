@@ -84,17 +84,19 @@ export default {
       );
     },
     submitForm() {
-      let personalData = {
-        name: this.name,
-        address: this.address,
-        phone: this.phone,
-        gender: this.gender,
-        doctor: this.doctor,
-        birthDate: this.birthDate,
-        xRayDate: this.xRayDate,
-        remarks: this.remarks
-      };
-      this.$emit("personal-data-submitted", personalData);
+      if (this.isAllInputFilled()) {
+        let personalData = {
+          name: this.name,
+          address: this.address,
+          phone: this.phone,
+          gender: this.gender,
+          doctor: this.doctor,
+          birthDate: this.birthDate,
+          xRayDate: this.xRayDate,
+          remarks: this.remarks
+        };
+        this.$emit("personal-data-submitted", personalData);
+      }
     }
   }
 };

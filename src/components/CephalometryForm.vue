@@ -1,7 +1,7 @@
 <template>
   <div class="content-div">
     <div class="form-div">
-      <form @submit.prevent="submitForm">
+      <form id="form-id" @submit.prevent="submitForm">
         <div class="inner-form-div">
           <div class="inner-input-div">
             <input type="text" class="form-input-half-width" v-model="name" placeholder="Name" />
@@ -27,6 +27,8 @@
       </div>
       <div class="generate-button-div">
         <button
+          type="submit"
+          form="form-id"
           class="generate-button-unclickable"
           :class="{'generate-button-clickable': isAllInputFilled()}"
         >Submit</button>
@@ -62,14 +64,37 @@ export default {
       this.remarks = null;
     },
     isAllInputFilled() {
-      return this.name !== null && this.name !== '' &&
-      this.address !== null && this.address !== '' &&
-      this.phone !== null && this.phone !== '' &&
-      this.gender !== null && this.gender !== '' &&
-      this.doctor !== null && this.doctor !== '' &&
-      this.birthDate !== null && this.birthDate !== '' &&
-      this.xRayDate !== null && this.xRayDate !== '' &&
-      this.remarks !== null && this.remarks !== '';
+      return (
+        this.name !== null &&
+        this.name !== "" &&
+        this.address !== null &&
+        this.address !== "" &&
+        this.phone !== null &&
+        this.phone !== "" &&
+        this.gender !== null &&
+        this.gender !== "" &&
+        this.doctor !== null &&
+        this.doctor !== "" &&
+        this.birthDate !== null &&
+        this.birthDate !== "" &&
+        this.xRayDate !== null &&
+        this.xRayDate !== "" &&
+        this.remarks !== null &&
+        this.remarks !== ""
+      );
+    },
+    submitForm() {
+      let personalData = {
+        name: this.name,
+        address: this.address,
+        phone: this.phone,
+        gender: this.gender,
+        doctor: this.doctor,
+        birthDate: this.birthDate,
+        xRayDate: this.xRayDate,
+        remarks: this.remarks
+      };
+      this.$emit("personal-data-submitted", personalData);
     }
   }
 };

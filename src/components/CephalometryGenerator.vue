@@ -34,6 +34,7 @@
         <button
           class="generate-button-unclickable"
           :class="{'generate-button-clickable': cephalometricPoints.length === index}"
+          @click="submitCephalometricCoordiantes"
         >Generate</button>
       </div>
     </div>
@@ -67,6 +68,7 @@ export default {
         "N'",
         "UL"
       ],
+      cephalometricCoordinates: null,
       index: 0
     };
   },
@@ -108,6 +110,10 @@ export default {
     saveCoordinates(event) {
       let mouseX = event.offsetX;
       let mouseY = event.offsetY;
+      this.cephalometricCoordinates[this.cephalometricPoints[this.index]].x =
+        event.offsetX;
+      this.cephalometricCoordinates[this.cephalometricPoints[this.index]].y =
+        event.offsetY;
       console.log(mouseX + " " + mouseY);
     },
     removeDots() {
@@ -116,6 +122,12 @@ export default {
       while (paras[0]) {
         paras[0].parentNode.removeChild(paras[0]);
       }
+    },
+    submitCephalometricCoordiantes() {
+      this.$emit(
+        "cephalometric-coordinates-submitted",
+        this.cephalometricCoordinates
+      );
     }
   }
 };

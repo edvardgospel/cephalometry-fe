@@ -3,33 +3,53 @@
     <NavigationBar />
     <div class="cephalometry-div">
       <div class="inner-cephalometry-div">
-        <!--<CephalometryGenerator />-->
-        <CephalometryForm />
+        <CephalometryForm
+          v-if="currentComponent === 'form'"
+          @personal-data-submitted="addPersonalData"
+        />
+        <CephalometryGenerator
+          v-else-if="currentComponent === 'generator'"
+          @cephalometric-coordinates-submitted="addCephalometricCoordinates"
+        />
+        <CephalometryMenu v-else-if="currentComponent === 'menu'" />
       </div>
     </div>
-    <Footer :author="author" :email="email" />
+    <Footer author="Edvard Eros" email="edvard.eros@yahoo.com" />
   </div>
 </template>
 
 <script>
 import NavigationBar from "./components/NavigationBar.vue";
-//import CephalometryGenerator from "./components/CephalometryGenerator.vue";
 import CephalometryForm from "./components/CephalometryForm.vue";
+import CephalometryGenerator from "./components/CephalometryGenerator.vue";
+import CephalometryMenu from "./components/CephalometryMenu.vue";
 import Footer from "./components/Footer.vue";
 
 export default {
   name: "App",
   components: {
     NavigationBar,
-    //CephalometryGenerator,
     CephalometryForm,
+    CephalometryGenerator,
+    CephalometryMenu,
     Footer
   },
   data() {
     return {
-      author: "Edvard Eros",
-      email: "edvard.eros@yahoo.com"
+      currentComponent: "form",
+      personalData: null,
+      cephalometricCoordinates: null
     };
+  },
+  methods: {
+    addPersonalData(personalData) {
+      this.currentComponent = "generator";
+      this.personalData = personalData;
+    },
+    addCephalometricCoordinates(cephalometricCoordinates) {
+      this.currentComponent = "menu";
+      this.cephalometricCoordinates = cephalometricCoordinates;
+    }
   }
 };
 </script>

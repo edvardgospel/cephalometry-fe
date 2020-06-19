@@ -203,16 +203,12 @@ input[type="radio"] {
 }
 
 .generate-button-unclickable {
-  cursor: not-allowed;
-  color: lightgray;
-}
-
-.generate-button-unclickable:hover {
-  color: #ffcccb;
-  border-color: #ffcccb;
+  pointer-events: none;
+  color: #dddddd;
 }
 
 .generate-button-clickable {
+  pointer-events: all;
   cursor: pointer;
   color: inherit;
 }

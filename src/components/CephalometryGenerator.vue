@@ -68,7 +68,7 @@ export default {
         "N'",
         "UL"
       ],
-      cephalometricCoordinates: null,
+      cephalometricCoordinates: [],
       index: 0
     };
   },
@@ -85,14 +85,13 @@ export default {
     },
     removeImage() {
       this.removeDots();
+      this.index = 0;
       this.cephalometricImage = "";
+      this.cephalometricCoordinates = [];
     },
     clickImage(event) {
-      this.incerementIndex();
-      this.addDot(event);
       this.saveCoordinates(event);
-    },
-    incerementIndex() {
+      this.addDot(event);
       this.index += 1;
     },
     addDot(event) {
@@ -108,16 +107,17 @@ export default {
       document.getElementById("inner-image-div-id").appendChild(div);
     },
     saveCoordinates(event) {
-      let mouseX = event.offsetX;
-      let mouseY = event.offsetY;
-      this.cephalometricCoordinates[this.cephalometricPoints[this.index]].x =
-        event.offsetX;
-      this.cephalometricCoordinates[this.cephalometricPoints[this.index]].y =
-        event.offsetY;
-      console.log(mouseX + " " + mouseY);
+      let cephalometricCoordinate = {
+        name: this.cephalometricPoints[this.index],
+        x: event.offsetX,
+        y: event.offsetY
+      };
+      this.cephalometricCoordinates.push(cephalometricCoordinate);
+      console.log(this.cephalometricCoordinates);
     },
     removeDots() {
       this.index = 0;
+      this.cephalometricCoordinates = [];
       var paras = document.getElementsByClassName("image-dot-div");
       while (paras[0]) {
         paras[0].parentNode.removeChild(paras[0]);
@@ -248,20 +248,15 @@ export default {
   border: 1px solid #dddddd;
   border-radius: 5px;
   font-family: inherit;
-  /*color: inherit;*/
 }
 
 .generate-button-unclickable {
-  cursor: not-allowed;
-  color: lightgray;
-}
-
-.generate-button-unclickable:hover {
-  color: #ffcccb;
-  border-color: #ffcccb;
+  pointer-events: none;
+  color: #dddddd;
 }
 
 .generate-button-clickable {
+  pointer-events: all;
   cursor: pointer;
   color: inherit;
 }

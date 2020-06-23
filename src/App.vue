@@ -9,9 +9,12 @@
         />
         <CephalometryGenerator
           v-else-if="currentComponent === 'generator'"
-          @cephalometric-coordinates-submitted="addCephalometricCoordinates"
+          @cephalometry-coordinates-submitted="addCephalometryCoordinates"
         />
-        <CephalometryMenu v-else-if="currentComponent === 'menu'" />
+        <CephalometryMenu
+          v-else-if="currentComponent === 'menu'"
+          :cephalometryResponse="cephalometryResponse"
+        />
       </div>
     </div>
     <Footer author="Edvard Eros" email="edvard.eros@yahoo.com" />
@@ -24,6 +27,7 @@ import CephalometryForm from "./components/CephalometryForm.vue";
 import CephalometryGenerator from "./components/CephalometryGenerator.vue";
 import CephalometryMenu from "./components/CephalometryMenu.vue";
 import Footer from "./components/Footer.vue";
+import api from "./Api.js";
 
 export default {
   name: "App",
@@ -38,17 +42,34 @@ export default {
     return {
       currentComponent: "form",
       personalData: null,
-      cephalometricCoordinates: null
+      cephalometryCoordinates: [],
+      cephalometryRequest: {},
+      cephalometryResponse: {}
     };
   },
   methods: {
     addPersonalData(personalData) {
-      this.currentComponent = "generator";
       this.personalData = personalData;
+      this.currentComponent = "generator";
     },
-    addCephalometricCoordinates(cephalometricCoordinates) {
-      this.currentComponent = "menu";
-      this.cephalometricCoordinates = cephalometricCoordinates;
+    addCephalometryCoordinates(cephalometryCoordinates) {
+      this.cephalometryCoordinates = cephalometryCoordinates;
+      this.createRequest();
+      api
+        .createNew(this.cephalometryRequest)
+        .then(response => {
+          this.cephalometryResponse = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.currentComponent = "menu";
+        });
+    },
+    createRequest() {
+      this.cephalometryRequest.personalData = this.personalData;
+      this.cephalometryRequest.cephalometryCoordinates = this.cephalometryCoordinates;
     }
   }
 };

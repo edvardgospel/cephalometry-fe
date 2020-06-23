@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Vue from 'vue'
 
 const SERVER_URL = 'http://localhost:9000';
 
@@ -9,39 +8,16 @@ const instance = axios.create({
 });
 
 export default {
-
-  async execute(method, resource, data, config) {
-    let accessToken = await Vue.prototype.$auth.getAccessToken()
-    return instance({
-      method: method,
-      url: resource,
-      data,
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      },
-      ...config
-    })
-  },
-
   // (C)reate  
-  createNew(text, completed) {
-    return this.execute('POST', 'cephalometry', { title: text, completed: completed })
-  },
+  createNew: body => instance.post('cephalometry', body),
   // (R)ead  
-  getAll() {
-    return this.execute('GET', 'cephalometry', null, {
-      transformResponse: [function (data) {
-        return data ? JSON.parse(data)._embedded.todos : data;
-      }]
-    })
-  },
+  getAll: () => instance.get('cephalometry', {
+    transformResponse: [function (data) {
+      return data;
+    }]
+  }),
   // (U)pdate  
-  updateForId(id, text, completed) {
-    return this.execute('PUT', 'cephalometry/' + id, { title: text, completed: completed })
-  },
-
+  updateForId: (id, body) => instance.put('cephalometry/' + id, body),
   // (D)elete  
-  removeForId(id) {
-    return this.execute('DELETE', 'cephalometry/' + id)
-  }
+  removeForId: (id) => instance.delete('cephalometry/' + id)
 }

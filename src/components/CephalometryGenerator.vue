@@ -68,7 +68,7 @@ export default {
         "N'",
         "UL"
       ],
-      cephalometricCoordinates: [],
+      cephalometryCoordinates: [],
       index: 0
     };
   },
@@ -87,7 +87,7 @@ export default {
       this.removeDots();
       this.index = 0;
       this.cephalometricImage = "";
-      this.cephalometricCoordinates = [];
+      this.cephalometryCoordinates = [];
     },
     clickImage(event) {
       this.saveCoordinates(event);
@@ -112,12 +112,11 @@ export default {
         x: event.offsetX,
         y: event.offsetY
       };
-      this.cephalometricCoordinates.push(cephalometricCoordinate);
-      console.log(this.cephalometricCoordinates);
+      this.cephalometryCoordinates.push(cephalometricCoordinate);
     },
     removeDots() {
       this.index = 0;
-      this.cephalometricCoordinates = [];
+      this.cephalometryCoordinates = [];
       var paras = document.getElementsByClassName("image-dot-div");
       while (paras[0]) {
         paras[0].parentNode.removeChild(paras[0]);
@@ -125,8 +124,8 @@ export default {
     },
     submitCephalometricCoordiantes() {
       this.$emit(
-        "cephalometric-coordinates-submitted",
-        this.cephalometricCoordinates
+        "cephalometry-coordinates-submitted",
+        this.cephalometryCoordinates
       );
     }
   }

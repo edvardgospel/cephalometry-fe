@@ -1,12 +1,26 @@
 <template>
   <div class="content-div">
-    <div class="form-div"></div>
+    <div class="menu-div">
+      <ul style="float:right; padding-right: 40px">
+        <li>Name: {{cephalometryResponse.personalData.name}}</li>
+        <li>Address: {{cephalometryResponse.personalData.address}}</li>
+        <li>Gender: {{cephalometryResponse.personalData.gender}}</li>
+        <li>Phone: {{cephalometryResponse.personalData.phone}}</li>
+        <li>Doctor: {{cephalometryResponse.personalData.doctor}}</li>
+        <li>Birthdate: {{cephalometryResponse.personalData.birthDate}}</li>
+        <li>X-ray date: {{cephalometryResponse.personalData.xRayDate}}</li>
+        <li>Remarks: {{cephalometryResponse.personalData.remarks}}</li>
+      </ul>
+      <ul>
+        <li
+          v-for="cephalometricAngle in cephalometryResponse.cephalometricAngles"
+          :key="cephalometricAngle.name"
+        >{{ cephalometricAngle.name }}: {{cephalometricAngle.angle}}°</li>
+      </ul>
+    </div>
     <div class="meta-elements-div">
-      <div class="meta-elements-labels-div">
-        <span class="reset-form-span" @click="resetForm">Reset form</span>
-      </div>
       <div class="generate-button-div">
-        <button type="submit" form="form-id" class="generate-button-unclickable">Submit</button>
+        <!--<button type="submit" form="form-id" class="generate-button-clickable">Submit</button>-->
       </div>
     </div>
   </div>
@@ -15,14 +29,11 @@
 <script>
 export default {
   name: "CephalometryMenu",
-  data() {
-    return {
-      asd: ""
-    };
+  props: {
+    cephalometryResponse: Object
   }
 };
 </script>
-
 
 <style scoped>
 .content-div {
@@ -31,7 +42,7 @@ export default {
   margin: 1rem auto;
 }
 
-.form-div {
+.menu-div {
   position: relative;
   height: 90%;
   width: 100%;
@@ -40,56 +51,8 @@ export default {
   border: 1px solid #dddddd;
 }
 
-form {
-  position: relative;
-  height: 100%;
-  width: 100%;
-}
-
-.inner-form-div {
-  position: relative;
-  height: 100%;
-  width: 60%;
-  margin: 3rem auto;
-}
-
-.form-input,
-.form-input-half-width {
-  position: relative;
-  display: block;
-  margin: 0 auto;
-  height: 1.5rem;
-  float: left;
-  margin-top: 2.5rem;
-  padding-left: 3px;
-  font-family: inherit;
-  color: inherit;
-  font-size: 1rem;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  border-bottom: 1px solid #dddddd;
-}
-
-.form-input {
-  width: 100%;
-}
-
-.form-input-half-width {
-  width: 50%;
-}
-
-.radio-input-div {
-  float: left;
-  margin-top: 2.5rem;
-  padding-left: 1rem;
-}
-
-input[type="radio"] {
-  margin-left: 0.5rem;
-  margin-right: 0.3rem;
-  margin-top: -1px;
-  vertical-align: middle;
+ul {
+  list-style-type: none;
 }
 
 .meta-elements-div {
@@ -99,39 +62,17 @@ input[type="radio"] {
   margin: 0 auto;
 }
 
-.meta-elements-labels-div {
-  float: left;
-  margin: 5px auto auto 5px;
-}
-
-.reset-form-span {
-  border: 1px solid #dddddd;
-  border-radius: 5px;
-  padding-right: 5px;
-  padding-left: 5px;
-  cursor: pointer;
-}
-
 .generate-button-div {
   float: right;
   margin: 3px auto auto 5px;
 }
 
-.generate-button-unclickable,
 .generate-button-clickable {
   font-size: 1.5em;
   background-color: #ffffff;
   border: 1px solid #dddddd;
   border-radius: 5px;
   font-family: inherit;
-}
-
-.generate-button-unclickable {
-  pointer-events: none;
-  color: #dddddd;
-}
-
-.generate-button-clickable {
   pointer-events: all;
   cursor: pointer;
   color: inherit;

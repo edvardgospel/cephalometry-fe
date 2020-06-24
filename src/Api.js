@@ -4,7 +4,7 @@ const SERVER_URL = 'https://cephalometry-be-mock.herokuapp.com';
 
 const instance = axios.create({
   baseURL: SERVER_URL,
-  timeout: 1000
+  timeout: 30000
 });
 
 export default {

@@ -34,6 +34,7 @@
         <button
           class="generate-button-unclickable"
           :class="{'generate-button-clickable': cephalometricPoints.length === index}"
+          @click="submitCephalometricCoordiantes"
         >Generate</button>
       </div>
     </div>
@@ -67,6 +68,7 @@ export default {
         "N'",
         "UL"
       ],
+      cephalometryCoordinates: [],
       index: 0
     };
   },
@@ -83,14 +85,13 @@ export default {
     },
     removeImage() {
       this.removeDots();
+      this.index = 0;
       this.cephalometricImage = "";
+      this.cephalometryCoordinates = [];
     },
     clickImage(event) {
-      this.incerementIndex();
-      this.addDot(event);
       this.saveCoordinates(event);
-    },
-    incerementIndex() {
+      this.addDot(event);
       this.index += 1;
     },
     addDot(event) {
@@ -106,16 +107,26 @@ export default {
       document.getElementById("inner-image-div-id").appendChild(div);
     },
     saveCoordinates(event) {
-      let mouseX = event.offsetX;
-      let mouseY = event.offsetY;
-      console.log(mouseX + " " + mouseY);
+      let cephalometricCoordinate = {
+        name: this.cephalometricPoints[this.index],
+        x: event.offsetX,
+        y: event.offsetY
+      };
+      this.cephalometryCoordinates.push(cephalometricCoordinate);
     },
     removeDots() {
       this.index = 0;
+      this.cephalometryCoordinates = [];
       var paras = document.getElementsByClassName("image-dot-div");
       while (paras[0]) {
         paras[0].parentNode.removeChild(paras[0]);
       }
+    },
+    submitCephalometricCoordiantes() {
+      this.$emit(
+        "cephalometry-coordinates-submitted",
+        this.cephalometryCoordinates
+      );
     }
   }
 };
@@ -176,7 +187,7 @@ export default {
 
 .file-upload-label {
   font-size: 1.4em;
-  cursor: pointer; /* "hand" cursor */
+  cursor: pointer;
   border-radius: 5px;
 }
 
@@ -239,16 +250,12 @@ export default {
 }
 
 .generate-button-unclickable {
-  cursor: not-allowed;
-  color: lightgray;
-}
-
-.generate-button-unclickable:hover {
-  color: #ffcccb;
-  border-color: #ffcccb;
+  pointer-events: none;
+  color: #dddddd;
 }
 
 .generate-button-clickable {
+  pointer-events: all;
   cursor: pointer;
   color: inherit;
 }

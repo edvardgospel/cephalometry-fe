@@ -3,36 +3,81 @@
     <NavigationBar />
     <div class="cephalometry-div">
       <div class="inner-cephalometry-div">
-        <CephalometryGenerator />
+        <CephalometryForm
+          v-if="currentComponent === 'form'"
+          @personal-data-submitted="addPersonalData"
+        />
+        <CephalometryGenerator
+          v-else-if="currentComponent === 'generator'"
+          @cephalometry-coordinates-submitted="addCephalometryCoordinates"
+        />
+        <CephalometryMenu
+          v-else-if="currentComponent === 'menu'"
+          :cephalometryResponse="cephalometryResponse"
+        />
       </div>
     </div>
-    <Footer :author="author" :email="email" />
+    <Footer author="Edvard Eros" email="edvard.eros@yahoo.com" />
   </div>
 </template>
 
 <script>
 import NavigationBar from "./components/NavigationBar.vue";
+import CephalometryForm from "./components/CephalometryForm.vue";
 import CephalometryGenerator from "./components/CephalometryGenerator.vue";
+import CephalometryMenu from "./components/CephalometryMenu.vue";
 import Footer from "./components/Footer.vue";
+import api from "./Api.js";
 
 export default {
   name: "App",
   components: {
     NavigationBar,
+    CephalometryForm,
     CephalometryGenerator,
+    CephalometryMenu,
     Footer
   },
   data() {
     return {
-      author: "Edvard Eros",
-      email: "edvard.eros@yahoo.com"
+      currentComponent: "form",
+      personalData: null,
+      cephalometryCoordinates: [],
+      cephalometryRequest: {},
+      cephalometryResponse: {}
     };
+  },
+  methods: {
+    addPersonalData(personalData) {
+      this.personalData = personalData;
+      this.currentComponent = "generator";
+    },
+    addCephalometryCoordinates(cephalometryCoordinates) {
+      this.cephalometryCoordinates = cephalometryCoordinates;
+      this.createRequest();
+      api
+        .createNew(this.cephalometryRequest)
+        .then(response => {
+          this.cephalometryResponse = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.currentComponent = "menu";
+        });
+    },
+    createRequest() {
+      this.cephalometryRequest.personalData = this.personalData;
+      this.cephalometryRequest.cephalometryCoordinates = this.cephalometryCoordinates;
+    }
   }
 };
 </script>
 
 <style>
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   margin: 0px;

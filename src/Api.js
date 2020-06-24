@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const SERVER_URL = 'http://localhost:9000';
+const SERVER_URL = 'https://cephalometry-be-mock.herokuapp.com';
 
 const instance = axios.create({
   baseURL: SERVER_URL,

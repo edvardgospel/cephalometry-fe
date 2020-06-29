@@ -11,6 +11,10 @@
           v-else-if="currentComponent === 'generator'"
           @cephalometry-coordinates-submitted="addCephalometryCoordinates"
         />
+        <CephalometryGrowthForecast
+          v-else-if="currentComponent === 'growth'"
+          @growth-forecast-submitted="addGrowthForecast"
+        />
         <CephalometryMenu
           v-else-if="currentComponent === 'menu'"
           :cephalometryResponse="cephalometryResponse"
@@ -27,6 +31,7 @@
 import NavigationBar from "./components/NavigationBar.vue";
 import CephalometryForm from "./components/CephalometryForm.vue";
 import CephalometryGenerator from "./components/CephalometryGenerator.vue";
+import CephalometryGrowthForecast from "./components/CephalometryGrowthForecast.vue";
 import CephalometryMenu from "./components/CephalometryMenu.vue";
 import LoadingScreen from "./components/LoadingScreen.vue";
 import ErrorScreen from "./components/ErrorScreen.vue";
@@ -39,6 +44,7 @@ export default {
     NavigationBar,
     CephalometryForm,
     CephalometryGenerator,
+    CephalometryGrowthForecast,
     CephalometryMenu,
     LoadingScreen,
     ErrorScreen,
@@ -46,9 +52,7 @@ export default {
   },
   data() {
     return {
-      currentComponent: "form", //[form, generator, menu, loading, error]
-      personalData: null,
-      cephalometryCoordinates: [],
+      currentComponent: "form", //[form, generator, growth, menu, loading, error]
       cephalometryRequest: {},
       cephalometryResponse: {},
       error: {}
@@ -56,12 +60,15 @@ export default {
   },
   methods: {
     addPersonalData(personalData) {
-      this.personalData = personalData;
+      this.cephalometryRequest.personalData = personalData;
       this.currentComponent = "generator";
     },
     addCephalometryCoordinates(cephalometryCoordinates) {
-      this.cephalometryCoordinates = cephalometryCoordinates;
-      this.createRequest();
+      this.cephalometryRequest.cephalometryCoordinates = cephalometryCoordinates;
+      this.currentComponent = "growth";
+    },
+    addGrowthForecast(growthForecast) {
+      this.cephalometryRequest.growthForecast = growthForecast;
       this.currentComponent = "loading";
       api
         .createNew(this.cephalometryRequest)
@@ -73,10 +80,6 @@ export default {
           this.error = error;
           this.currentComponent = "error";
         });
-    },
-    createRequest() {
-      this.cephalometryRequest.personalData = this.personalData;
-      this.cephalometryRequest.cephalometryCoordinates = this.cephalometryCoordinates;
     }
   }
 };

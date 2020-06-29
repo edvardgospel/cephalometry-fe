@@ -3,21 +3,12 @@
     <div class="form-div">
       <form id="form-id" @submit.prevent="submitForm">
         <div class="inner-form-div">
-          <div class="inner-input-div">
-            <input type="text" class="form-input-half-width" v-model="name" placeholder="Name" />
-          </div>
-          <div class="radio-input-div">
-            <input type="radio" id="male" v-model="gender" value="male" />
-            <label for="male">Male&nbsp;</label>
-            <input type="radio" id="female" v-model="gender" value="female" />
-            <label for="female">Female</label>
-          </div>
-          <input type="text" class="form-input" v-model="address" placeholder="Address" />
-          <input type="tel" class="form-input" v-model="phone" placeholder="Phone" />
-          <input type="text" class="form-input" v-model="doctor" placeholder="Doctor" />
-          <input type="date" class="form-input" v-model="birthDate" placeholder="Birthdate" />
-          <input type="date" class="form-input" v-model="xRayDate" placeholder="X-Ray date" />
-          <input type="text" class="form-input" v-model="remarks" placeholder="Remarks" />
+          <input type="text" class="form-input" v-model="newANB" placeholder="New ANB" />
+          <input type="text" class="form-input" v-model="newMLNL" placeholder="New ML-NL" />
+          <input type="text" class="form-input" v-model="newN" placeholder="New N" />
+          <input type="text" class="form-input" v-model="condyl" placeholder="Condyl" />
+          <input type="text" class="form-input" v-model="canalisMand" placeholder="Canalis mand." />
+          <input type="text" class="form-input" v-model="mandibula" placeholder="Mandibula" />
         </div>
       </form>
     </div>
@@ -42,60 +33,50 @@ export default {
   name: "CephalometryGrowthForecast",
   data() {
     return {
-      name: null,
-      address: null,
-      phone: null,
-      gender: null,
-      doctor: null,
-      birthDate: null,
-      xRayDate: null,
-      remarks: null
+      newANB: null,
+      newMLNL: null,
+      newN: null,
+      condyl: null,
+      canalisMand: null,
+      mandibula: null
     };
   },
   methods: {
     resetForm() {
-      this.name = null;
-      this.address = null;
-      this.phone = null;
-      this.gender = null;
-      this.doctor = null;
-      this.birthDate = null;
-      this.xRayDate = null;
-      this.remarks = null;
+      this.newANB = null;
+      this.newMLNL = null;
+      this.newN = null;
+      this.condyl = null;
+      this.canalisMand = null;
+      this.mandibula = null;
     },
     isAllInputFilled() {
       return (
-        this.name !== null &&
-        this.name !== "" &&
-        this.address !== null &&
-        this.address !== "" &&
-        this.phone !== null &&
-        this.phone !== "" &&
-        this.gender !== null &&
-        this.gender !== "" &&
-        this.doctor !== null &&
-        this.doctor !== "" &&
-        this.birthDate !== null &&
-        this.birthDate !== "" &&
-        this.xRayDate !== null &&
-        this.xRayDate !== "" &&
-        this.remarks !== null &&
-        this.remarks !== ""
+        this.newANB !== null &&
+        this.newANB !== "" &&
+        this.newMLNL !== null &&
+        this.newMLNL !== "" &&
+        this.newN !== null &&
+        this.newN !== "" &&
+        this.condyl !== null &&
+        this.condyl !== "" &&
+        this.canalisMand !== null &&
+        this.canalisMand !== "" &&
+        this.mandibula !== null &&
+        this.mandibula !== ""
       );
     },
     submitForm() {
       if (this.isAllInputFilled()) {
-        let personalData = {
-          name: this.name,
-          address: this.address,
-          phone: this.phone,
-          gender: this.gender,
-          doctor: this.doctor,
-          birthDate: this.birthDate,
-          xRayDate: this.xRayDate,
-          remarks: this.remarks
+        let growthForecast = {
+          newANB: this.newANB,
+          newMLNL: this.newMLNL,
+          newN: this.newN,
+          condyl: this.condyl,
+          canalisMand: this.canalisMand,
+          mandibula: this.mandibula
         };
-        this.$emit("personal-data-submitted", personalData);
+        this.$emit("growth-forecast-submitted", growthForecast);
       }
     }
   }
@@ -131,10 +112,10 @@ form {
   margin: 3rem auto;
 }
 
-.form-input,
-.form-input-half-width {
+.form-input {
   position: relative;
   display: block;
+  width: 100%;
   margin: 0 auto;
   height: 1.5rem;
   float: left;
@@ -147,27 +128,6 @@ form {
   outline: 0;
   background: transparent;
   border-bottom: 1px solid #dddddd;
-}
-
-.form-input {
-  width: 100%;
-}
-
-.form-input-half-width {
-  width: 50%;
-}
-
-.radio-input-div {
-  float: left;
-  margin-top: 2.5rem;
-  padding-left: 1rem;
-}
-
-input[type="radio"] {
-  margin-left: 0.5rem;
-  margin-right: 0.3rem;
-  margin-top: -1px;
-  vertical-align: middle;
 }
 
 .meta-elements-div {

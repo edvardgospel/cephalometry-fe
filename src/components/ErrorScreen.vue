@@ -2,8 +2,7 @@
   <div class="content-div">
     <div class="menu-div">
       <ul>
-        <li>Sorry, couldn't load data from server. Try again later.
-        </li>
+        <li>{{error}}</li>
       </ul>
     </div>
     <div class="meta-elements-div">
@@ -16,7 +15,10 @@
 
 <script>
 export default {
-  name: "LoadingScreen"
+  name: "ErrorScreen",
+  props: {
+    error: Error
+  }
 };
 </script>
 

@@ -16,7 +16,7 @@
           :cephalometryResponse="cephalometryResponse"
         />
         <LoadingScreen v-else-if="currentComponent === 'loading'" />
-        <ErrorScreen v-else-if="currentComponent === 'error'" />
+        <ErrorScreen v-else-if="currentComponent === 'error'" :error="error" />
       </div>
     </div>
     <Footer author="Edvard Eros" email="edvard.eros@yahoo.com" />
@@ -46,11 +46,12 @@ export default {
   },
   data() {
     return {
-      currentComponent: "form",
+      currentComponent: "form", //[form, generator, menu, loading, error]
       personalData: null,
       cephalometryCoordinates: [],
       cephalometryRequest: {},
-      cephalometryResponse: {}
+      cephalometryResponse: {},
+      error: {}
     };
   },
   methods: {
@@ -69,11 +70,9 @@ export default {
           this.currentComponent = "menu";
         })
         .catch(error => {
-          //TODO change this
-          console.log(error);
+          this.error = error;
           this.currentComponent = "error";
-        })
-        .finally(() => {});
+        });
     },
     createRequest() {
       this.cephalometryRequest.personalData = this.personalData;

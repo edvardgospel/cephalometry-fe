@@ -1,36 +1,49 @@
 <template>
   <div class="content-div">
     <div class="menu-div">
-      <ul style="float:right; padding-right: 40px">
-        <li>Name: {{cephalometryResponse.personalData.name}}</li>
-        <li>Address: {{cephalometryResponse.personalData.address}}</li>
-        <li>Gender: {{cephalometryResponse.personalData.gender}}</li>
-        <li>Phone: {{cephalometryResponse.personalData.phone}}</li>
-        <li>Doctor: {{cephalometryResponse.personalData.doctor}}</li>
-        <li>Birthdate: {{cephalometryResponse.personalData.birthDate}}</li>
-        <li>X-ray date: {{cephalometryResponse.personalData.xRayDate}}</li>
-        <li>Remarks: {{cephalometryResponse.personalData.remarks}}</li>
-      </ul>
-      <ul>
-        <li
-          v-for="cephalometricAngle in cephalometryResponse.cephalometricAngles"
-          :key="cephalometricAngle.name"
-        >{{ cephalometricAngle.name }}: {{cephalometricAngle.angle}}°</li>
-      </ul>
+      <PersonalData
+        v-show="currentComponent === 'personal'"
+        :personalData="cephalometryResponse.personalData"
+      />
+      <AngleTable
+        v-show="currentComponent === 'angle'"
+        :cephalometricAngles="cephalometryResponse.cephalometricAngles"
+      />
+      <HarmonyTable
+        v-show="currentComponent === 'harmony'"
+        :cephalometricAngles="cephalometryResponse.cephalometricAngles"
+      />
     </div>
     <div class="meta-elements-div">
-      <div class="generate-button-div">
-        <!--<button type="submit" form="form-id" class="generate-button-clickable">Submit</button>-->
+      <div class="meta-elements-labels-div">
+        <span class="meta-elements-span" @click="currentComponent = 'personal'">Personal data</span>
+        <span class="meta-elements-span" @click="currentComponent = 'angle'">Angles</span>
+        <span class="meta-elements-span" @click="currentComponent = 'harmony'">Harmony table</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import PersonalData from "./cephalometry/menu/PersonalData.vue";
+import AngleTable from "./cephalometry/menu/AngleTable.vue";
+import HarmonyTable from "./cephalometry/menu/HarmonyTable.vue";
+
 export default {
   name: "CephalometryMenu",
+  components: {
+    PersonalData,
+    AngleTable,
+    HarmonyTable
+  },
   props: {
-    cephalometryResponse: Object
+    cephalometryResponse: Object,
+    cephalometricImage: String
+  },
+  data() {
+    return {
+      currentComponent: "personal" //[personal, angle, harmony]
+    };
   }
 };
 </script>
@@ -51,10 +64,6 @@ export default {
   border: 1px solid #dddddd;
 }
 
-ul {
-  list-style-type: none;
-}
-
 .meta-elements-div {
   position: relative;
   height: 100%;
@@ -62,25 +71,18 @@ ul {
   margin: 0 auto;
 }
 
-.generate-button-div {
-  float: right;
-  margin: 3px auto auto 5px;
+.meta-elements-labels-div {
+  float: left;
+  margin: 5px auto auto 5px;
 }
 
-.generate-button-clickable {
-  font-size: 1.5em;
-  background-color: #ffffff;
+.meta-elements-span {
   border: 1px solid #dddddd;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
   border-radius: 5px;
-  font-family: inherit;
-  pointer-events: all;
   cursor: pointer;
-  color: inherit;
-}
-
-.generate-button-clickable:hover {
-  color: inherit;
-  background-color: #f5f5f5;
-  border-color: #f5f5f5;
 }
 </style>

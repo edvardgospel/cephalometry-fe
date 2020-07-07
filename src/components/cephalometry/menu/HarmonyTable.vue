@@ -1,6 +1,5 @@
 <template>
   <div class="harmony-table-content-div">
-    HarmonyTable
     <ul>
       <li
         v-for="cephalometricAngle in cephalometricAngles"

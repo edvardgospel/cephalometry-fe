@@ -7,10 +7,26 @@
     </div>
     <div class="meta-elements-div">
       <div class="meta-elements-labels-div">
-        <span class="meta-elements-span" @click="currentComponent = 'PersonalData'">Personal data</span>
-        <span class="meta-elements-span" @click="currentComponent = 'AngleTable'">Angles</span>
-        <span class="meta-elements-span" @click="currentComponent = 'HarmonyTable'">Harmony table</span>
-        <span class="meta-elements-span" @click="currentComponent = 'Xray'">X-ray</span>
+        <span
+          class="meta-elements-span"
+          :class="{'meta-elements-span-active': this.currentComponent  === 'PersonalData'}"
+          @click="currentComponent = 'PersonalData';"
+        >Personal data</span>
+        <span
+          class="meta-elements-span"
+          :class="{'meta-elements-span-active':  this.currentComponent  === 'AngleTable'}"
+          @click="currentComponent = 'AngleTable'"
+        >Angles</span>
+        <span
+          class="meta-elements-span"
+          :class="{'meta-elements-span-active':  this.currentComponent  === 'HarmonyTable'}"
+          @click="currentComponent = 'HarmonyTable'"
+        >Harmony table</span>
+        <span
+          class="meta-elements-span"
+          :class="{'meta-elements-span-active':  this.currentComponent  === 'Xray'}"
+          @click="currentComponent = 'Xray'"
+        >X-ray</span>
       </div>
     </div>
   </div>
@@ -74,5 +90,9 @@ export default {
   padding-left: 5px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.meta-elements-span-active {
+  background-color: #dddddd;
 }
 </style>

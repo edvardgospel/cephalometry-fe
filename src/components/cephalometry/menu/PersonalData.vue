@@ -1,6 +1,6 @@
 <template>
   <div class="personal-data-content-div">
-    <ul style="float:right; padding-right: 40px">
+    <ul>
       <li>Name: {{personalData.name}}</li>
       <li>Address: {{personalData.address}}</li>
       <li>Gender: {{personalData.gender}}</li>

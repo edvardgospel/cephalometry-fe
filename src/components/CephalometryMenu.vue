@@ -1,24 +1,16 @@
 <template>
   <div class="content-div">
     <div class="menu-div">
-      <PersonalData
-        v-show="currentComponent === 'personal'"
-        :personalData="cephalometryResponse.personalData"
-      />
-      <AngleTable
-        v-show="currentComponent === 'angle'"
-        :cephalometricAngles="cephalometryResponse.cephalometricAngles"
-      />
-      <HarmonyTable
-        v-show="currentComponent === 'harmony'"
-        :cephalometricAngles="cephalometryResponse.cephalometricAngles"
-      />
+      <keep-alive>
+        <component :is="currentComponent" />
+      </keep-alive>
     </div>
     <div class="meta-elements-div">
       <div class="meta-elements-labels-div">
-        <span class="meta-elements-span" @click="currentComponent = 'personal'">Personal data</span>
-        <span class="meta-elements-span" @click="currentComponent = 'angle'">Angles</span>
-        <span class="meta-elements-span" @click="currentComponent = 'harmony'">Harmony table</span>
+        <span class="meta-elements-span" @click="currentComponent = 'PersonalData'">Personal data</span>
+        <span class="meta-elements-span" @click="currentComponent = 'AngleTable'">Angles</span>
+        <span class="meta-elements-span" @click="currentComponent = 'HarmonyTable'">Harmony table</span>
+        <span class="meta-elements-span" @click="currentComponent = 'Xray'">X-ray</span>
       </div>
     </div>
   </div>
@@ -28,21 +20,19 @@
 import PersonalData from "./cephalometry/menu/PersonalData.vue";
 import AngleTable from "./cephalometry/menu/AngleTable.vue";
 import HarmonyTable from "./cephalometry/menu/HarmonyTable.vue";
+import Xray from "./cephalometry/Xray.vue";
 
 export default {
   name: "CephalometryMenu",
   components: {
     PersonalData,
     AngleTable,
-    HarmonyTable
-  },
-  props: {
-    cephalometryResponse: Object,
-    cephalometricImage: String
+    HarmonyTable,
+    Xray
   },
   data() {
     return {
-      currentComponent: "personal" //[personal, angle, harmony]
+      currentComponent: "PersonalData" //[PersonalData, AngleTable, HarmonyTable, Xray]
     };
   }
 };

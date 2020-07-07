@@ -35,7 +35,7 @@
           class="generate-button-unclickable"
           :class="{'generate-button-clickable': cephalometricPoints.length === index}"
           @click="submitCephalometricCoordiantes"
-        >Generate</button>
+        >Next</button>
       </div>
     </div>
   </div>
@@ -123,10 +123,9 @@ export default {
       }
     },
     submitCephalometricCoordiantes() {
-      this.$emit(
-        "cephalometry-coordinates-submitted",
-        this.cephalometryCoordinates
-      );
+      this.$store.commit("SET_CEPHALOMETRIC_IMAGE", this.cephalometricImage);
+      this.$store.commit("SET_CEPHALOMETRY_COORDINATES", this.cephalometryCoordinates);
+      this.$store.commit("NEXT_COMPONENT");
     }
   }
 };

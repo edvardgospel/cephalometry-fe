@@ -22,7 +22,7 @@
           form="form-id"
           class="generate-button-unclickable"
           :class="{'generate-button-clickable': isAllInputFilled()}"
-        >Submit</button>
+        >Next</button>
       </div>
     </div>
   </div>
@@ -76,7 +76,8 @@ export default {
           canalisMand: this.canalisMand,
           mandibula: this.mandibula
         };
-        this.$emit("growth-forecast-submitted", growthForecast);
+        this.$store.commit("SET_GROWTH_FORECAST", growthForecast);
+        this.$store.commit("NEXT_COMPONENT");
       }
     }
   }

@@ -31,7 +31,7 @@
           form="form-id"
           class="generate-button-unclickable"
           :class="{'generate-button-clickable': isAllInputFilled()}"
-        >Submit</button>
+        >Next</button>
       </div>
     </div>
   </div>
@@ -95,7 +95,8 @@ export default {
           xRayDate: this.xRayDate,
           remarks: this.remarks
         };
-        this.$emit("personal-data-submitted", personalData);
+        this.$store.commit("SET_PERSONAL_DATA", personalData);
+        this.$store.commit("NEXT_COMPONENT");
       }
     }
   }

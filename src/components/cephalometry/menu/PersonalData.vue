@@ -16,8 +16,10 @@
 <script>
 export default {
   name: "PersonalData",
-  props: {
-    personalData: Object
+  computed: {
+    personalData() {
+      return this.$store.getters.PERSONAL_DATA;
+    }
   }
 };
 </script>

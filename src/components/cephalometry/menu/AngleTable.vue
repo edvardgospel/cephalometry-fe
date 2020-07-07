@@ -10,10 +10,13 @@
 </template>
 
 <script>
+import AngleCalcualator from "../../../resources/service/angle-calculator.js";
 export default {
   name: "AngleTable",
-  props: {
-    cephalometricAngles: Array
+  computed: {
+    cephalometricAngles() {
+      return AngleCalcualator.returnAngles();
+    }
   }
 };
 </script>

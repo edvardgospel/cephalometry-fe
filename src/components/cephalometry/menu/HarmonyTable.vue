@@ -6,6 +6,15 @@
         :key="cephalometricAngle.name"
       >{{ cephalometricAngle.name }}: {{cephalometricAngle.angle}}°</li>
     </ul>
+    <table>
+      <tr>
+        <th>SNA</th>
+        <th>NL-NSL</th>
+        <th>NSBa</th>
+        <th>ML-NSL</th>
+        <th>SNB</th>
+      </tr>
+    </table>
   </div>
 </template>
 

@@ -3,20 +3,7 @@
     <NavigationBar />
     <div class="cephalometry-div">
       <div class="inner-cephalometry-div">
-        <CephalometryForm
-          v-if="currentComponent === 'form'"
-          @personal-data-submitted="addPersonalData"
-        />
-        <CephalometryGenerator
-          v-else-if="currentComponent === 'generator'"
-          @cephalometry-coordinates-submitted="addCephalometryCoordinates"
-        />
-        <CephalometryMenu
-          v-else-if="currentComponent === 'menu'"
-          :cephalometryResponse="cephalometryResponse"
-        />
-        <LoadingScreen v-else-if="currentComponent === 'loading'" />
-        <ErrorScreen v-else-if="currentComponent === 'error'" />
+        <component :is="currentComponent" />
       </div>
     </div>
     <Footer author="Edvard Eros" email="edvard.eros@yahoo.com" />
@@ -27,11 +14,9 @@
 import NavigationBar from "./components/NavigationBar.vue";
 import CephalometryForm from "./components/CephalometryForm.vue";
 import CephalometryGenerator from "./components/CephalometryGenerator.vue";
+import CephalometryGrowthForecast from "./components/CephalometryGrowthForecast.vue";
 import CephalometryMenu from "./components/CephalometryMenu.vue";
-import LoadingScreen from "./components/LoadingScreen.vue";
-import ErrorScreen from "./components/ErrorScreen.vue";
 import Footer from "./components/Footer.vue";
-import api from "./Api.js";
 
 export default {
   name: "App",
@@ -39,45 +24,13 @@ export default {
     NavigationBar,
     CephalometryForm,
     CephalometryGenerator,
+    CephalometryGrowthForecast,
     CephalometryMenu,
-    LoadingScreen,
-    ErrorScreen,
     Footer
   },
-  data() {
-    return {
-      currentComponent: "form",
-      personalData: null,
-      cephalometryCoordinates: [],
-      cephalometryRequest: {},
-      cephalometryResponse: {}
-    };
-  },
-  methods: {
-    addPersonalData(personalData) {
-      this.personalData = personalData;
-      this.currentComponent = "generator";
-    },
-    addCephalometryCoordinates(cephalometryCoordinates) {
-      this.cephalometryCoordinates = cephalometryCoordinates;
-      this.createRequest();
-      this.currentComponent = "loading";
-      api
-        .createNew(this.cephalometryRequest)
-        .then(response => {
-          this.cephalometryResponse = response.data;
-          this.currentComponent = "menu";
-        })
-        .catch(error => {
-          //TODO change this
-          console.log(error);
-          this.currentComponent = "error";
-        })
-        .finally(() => {});
-    },
-    createRequest() {
-      this.cephalometryRequest.personalData = this.personalData;
-      this.cephalometryRequest.cephalometryCoordinates = this.cephalometryCoordinates;
+  computed: {
+    currentComponent() {
+      return this.$store.getters.CURRENT_COMPONENT;
     }
   }
 };

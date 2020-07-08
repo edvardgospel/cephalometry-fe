@@ -1,36 +1,55 @@
 <template>
   <div class="content-div">
     <div class="menu-div">
-      <ul style="float:right; padding-right: 40px">
-        <li>Name: {{cephalometryResponse.personalData.name}}</li>
-        <li>Address: {{cephalometryResponse.personalData.address}}</li>
-        <li>Gender: {{cephalometryResponse.personalData.gender}}</li>
-        <li>Phone: {{cephalometryResponse.personalData.phone}}</li>
-        <li>Doctor: {{cephalometryResponse.personalData.doctor}}</li>
-        <li>Birthdate: {{cephalometryResponse.personalData.birthDate}}</li>
-        <li>X-ray date: {{cephalometryResponse.personalData.xRayDate}}</li>
-        <li>Remarks: {{cephalometryResponse.personalData.remarks}}</li>
-      </ul>
-      <ul>
-        <li
-          v-for="cephalometricAngle in cephalometryResponse.cephalometricAngles"
-          :key="cephalometricAngle.name"
-        >{{ cephalometricAngle.name }}: {{cephalometricAngle.angle}}°</li>
-      </ul>
+      <keep-alive>
+        <component :is="currentComponent" />
+      </keep-alive>
     </div>
     <div class="meta-elements-div">
-      <div class="generate-button-div">
-        <!--<button type="submit" form="form-id" class="generate-button-clickable">Submit</button>-->
+      <div class="meta-elements-labels-div">
+        <span
+          class="meta-elements-span"
+          :class="{'meta-elements-span-active': this.currentComponent  === 'PersonalData'}"
+          @click="currentComponent = 'PersonalData';"
+        >Personal data</span>
+        <span
+          class="meta-elements-span"
+          :class="{'meta-elements-span-active':  this.currentComponent  === 'AngleTable'}"
+          @click="currentComponent = 'AngleTable'"
+        >Angles</span>
+        <span
+          class="meta-elements-span"
+          :class="{'meta-elements-span-active':  this.currentComponent  === 'HarmonyTable'}"
+          @click="currentComponent = 'HarmonyTable'"
+        >Harmony table</span>
+        <span
+          class="meta-elements-span"
+          :class="{'meta-elements-span-active':  this.currentComponent  === 'Xray'}"
+          @click="currentComponent = 'Xray'"
+        >X-ray</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import PersonalData from "./cephalometry/menu/PersonalData.vue";
+import AngleTable from "./cephalometry/menu/AngleTable.vue";
+import HarmonyTable from "./cephalometry/menu/HarmonyTable.vue";
+import Xray from "./cephalometry/Xray.vue";
+
 export default {
   name: "CephalometryMenu",
-  props: {
-    cephalometryResponse: Object
+  components: {
+    PersonalData,
+    AngleTable,
+    HarmonyTable,
+    Xray
+  },
+  data() {
+    return {
+      currentComponent: "PersonalData" //[PersonalData, AngleTable, HarmonyTable, Xray]
+    };
   }
 };
 </script>
@@ -51,10 +70,6 @@ export default {
   border: 1px solid #dddddd;
 }
 
-ul {
-  list-style-type: none;
-}
-
 .meta-elements-div {
   position: relative;
   height: 100%;
@@ -62,25 +77,22 @@ ul {
   margin: 0 auto;
 }
 
-.generate-button-div {
-  float: right;
-  margin: 3px auto auto 5px;
+.meta-elements-labels-div {
+  float: left;
+  margin: 5px auto auto 5px;
 }
 
-.generate-button-clickable {
-  font-size: 1.5em;
-  background-color: #ffffff;
+.meta-elements-span {
   border: 1px solid #dddddd;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
   border-radius: 5px;
-  font-family: inherit;
-  pointer-events: all;
   cursor: pointer;
-  color: inherit;
 }
 
-.generate-button-clickable:hover {
-  color: inherit;
-  background-color: #f5f5f5;
-  border-color: #f5f5f5;
+.meta-elements-span-active {
+  background-color: #dddddd;
 }
 </style>

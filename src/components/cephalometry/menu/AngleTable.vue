@@ -4,7 +4,7 @@
       <li
         v-for="cephalometricAngle in cephalometricAngles"
         :key="cephalometricAngle.name"
-      >{{ cephalometricAngle.name }}: {{cephalometricAngle.angle}}°</li>
+      >{{ cephalometricAngle.name }}: {{cephalometricAngle.angle.toFixed(2)}}°</li>
     </ul>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
   name: "AngleTable",
   computed: {
     cephalometricAngles() {
-      return AngleCalcualator.returnAngles();
+      return AngleCalcualator.returnAngles(this.$store.getters.CEPHALOMETRY_COORDINATES);
     }
   }
 };

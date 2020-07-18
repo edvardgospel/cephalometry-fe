@@ -34,13 +34,13 @@ export default {
     let basion = cephalometryCoordinates.find(coord => coord.name === "Ba");
     let gonion = cephalometryCoordinates.find(coord => coord.name === "tgo");
     let articulare = cephalometryCoordinates.find(coord => coord.name === "Ar");
-    let pterygomaxillare = cephalometryCoordinates.find(coord => coord.name === "Pm");
-    let spina = cephalometryCoordinates.find(coord => coord.name === "Sp");
-    let incisionSuperius = cephalometryCoordinates.find(coord => coord.name === "is");
-    let apicaleSuperius = cephalometryCoordinates.find(coord => coord.name === "isa");
-    let incisionInferius = cephalometryCoordinates.find(coord => coord.name === "ii");
-    let apicaleInferius = cephalometryCoordinates.find(coord => coord.name === "iia");
-    let pogonionSoft = cephalometryCoordinates.find(coord => coord.name === "PG");
+    let pterygomaxillare = cephalometryCoordinates.find(coord => coord.name === "PNS");
+    let spina = cephalometryCoordinates.find(coord => coord.name === "ANS");
+    let incisionSuperius = cephalometryCoordinates.find(coord => coord.name === "UI");
+    let apicaleSuperius = cephalometryCoordinates.find(coord => coord.name === "UIA");
+    let incisionInferius = cephalometryCoordinates.find(coord => coord.name === "LI");
+    let apicaleInferius = cephalometryCoordinates.find(coord => coord.name === "LIA");
+    let pogonionSoft = cephalometryCoordinates.find(coord => coord.name === "Pg soft");
     let upperLip = cephalometryCoordinates.find(coord => coord.name === "UL");
 
 

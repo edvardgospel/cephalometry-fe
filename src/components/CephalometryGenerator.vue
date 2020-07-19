@@ -230,7 +230,7 @@ export default {
   cursor: default;
   display: inline-block;
   text-align: center;
-  width: 20px;
+  width: 50px;
 }
 
 .generate-button-div {

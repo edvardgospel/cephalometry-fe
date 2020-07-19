@@ -51,20 +51,19 @@ export default {
         "N",
         "S",
         "Ba",
-        "Sp",
+        "ANS",
         "A",
-        "Pm",
-        "is",
-        "isa",
+        "PNS",
+        "UI",
+        "UIA",
         "B",
         "Pg",
         "Gn",
-        "ii",
-        "iia",
+        "LI",
+        "LIA",
         "Ar",
-        "Sp'",
         "tgo",
-        "PG",
+        "Pg soft",
         "N'",
         "UL"
       ],
@@ -231,7 +230,7 @@ export default {
   cursor: default;
   display: inline-block;
   text-align: center;
-  width: 20px;
+  width: 50px;
 }
 
 .generate-button-div {

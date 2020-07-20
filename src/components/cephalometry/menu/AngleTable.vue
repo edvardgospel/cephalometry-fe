@@ -6,6 +6,14 @@
         :key="cephalometricAngle.name"
       >{{ cephalometricAngle.name }}: {{cephalometricAngle.angle.toFixed(2)}}°</li>
     </ul>
+    <ul>
+      <li>Modified ANB: {{growthForecast.newANB}}</li>
+      <li>Modified ML-NL: {{growthForecast.newMLNL}}</li>
+      <li>Modified N: {{growthForecast.newN}}</li>
+      <li>Condylus: {{growthForecast.condyl}}</li>
+      <li>Canalis mandibula: {{growthForecast.canalisMand}}</li>
+      <li>Mandibula: {{growthForecast.mandibula}}</li>
+    </ul>
   </div>
 </template>
 
@@ -15,7 +23,12 @@ export default {
   name: "AngleTable",
   computed: {
     cephalometricAngles() {
-      return AngleCalcualator.getAngles(this.$store.getters.CEPHALOMETRY_COORDINATES);
+      return AngleCalcualator.getAngles(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      );
+    },
+    growthForecast() {
+      return this.$store.getters.GROWTH_FORECAST;
     }
   }
 };

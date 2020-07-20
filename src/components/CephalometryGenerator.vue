@@ -27,7 +27,7 @@
         <span
           class="actual-cephalometric-point-span"
         >{{cephalometricPoints[index] ? cephalometricPoints[index] : "&#10003;"}}</span>
-        <span class="reset-points-span" @click="removeDots">Reset points</span>
+        <span class="reset-points-span" @click="removeDot">Reset point</span>
         <span class="reset-image-span" @click="removeImage">Reset image</span>
       </div>
       <div class="generate-button-div">
@@ -113,6 +113,14 @@ export default {
       };
       this.cephalometryCoordinates.push(cephalometricCoordinate);
     },
+    removeDot() {
+      if (this.index > 0) {
+        this.index -= 1;
+        this.cephalometryCoordinates.pop();
+        var select = document.getElementById("inner-image-div-id");
+        select.removeChild(select.lastChild);
+      }
+    },
     removeDots() {
       this.index = 0;
       this.cephalometryCoordinates = [];
@@ -123,7 +131,10 @@ export default {
     },
     submitCephalometricCoordiantes() {
       this.$store.commit("SET_CEPHALOMETRIC_IMAGE", this.cephalometricImage);
-      this.$store.commit("SET_CEPHALOMETRY_COORDINATES", this.cephalometryCoordinates);
+      this.$store.commit(
+        "SET_CEPHALOMETRY_COORDINATES",
+        this.cephalometryCoordinates
+      );
       this.$store.commit("NEXT_COMPONENT");
     }
   }

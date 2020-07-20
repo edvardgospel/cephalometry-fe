@@ -13,10 +13,10 @@
             <label for="female">Female</label>
           </div>
           <input type="text" class="form-input" v-model="address" placeholder="Address" />
-          <input type="tel" class="form-input" v-model="phone" placeholder="Phone" />
+          <input type="text" class="form-input" v-model="phone" placeholder="Phone" />
           <input type="text" class="form-input" v-model="doctor" placeholder="Doctor" />
-          <input type="date" class="form-input" v-model="birthDate" placeholder="Birthdate" />
-          <input type="date" class="form-input" v-model="xRayDate" placeholder="X-Ray date" />
+          <input type="text" class="form-input" v-model="birthDate" placeholder="Birthdate" />
+          <input type="text" class="form-input" v-model="xRayDate" placeholder="X-Ray date" />
           <input type="text" class="form-input" v-model="remarks" placeholder="Remarks" />
         </div>
       </form>
@@ -190,6 +190,14 @@ input[type="radio"] {
   padding-left: 5px;
   cursor: pointer;
 }
+
+input[type="date"]::before { 
+	content: attr(data-placeholder);
+	width: 100%;
+}
+
+input[type="date"]:focus::before,
+input[type="date"]:valid::before { display: none }
 
 .generate-button-div {
   float: right;

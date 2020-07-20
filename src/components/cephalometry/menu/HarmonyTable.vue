@@ -151,7 +151,7 @@ export default {
   },
   computed: {
     cephalometricAngles() {
-      return AngleCalcualator.returnAngles(
+      return AngleCalcualator.getAngles(
         this.$store.getters.CEPHALOMETRY_COORDINATES
       );
     },

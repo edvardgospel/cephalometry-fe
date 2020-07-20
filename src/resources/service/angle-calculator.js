@@ -23,7 +23,31 @@ export default {
     return (p.x - a.x) * (b.y - a.y) - (p.y - a.y) * (b.x - a.x);
   },
 
-  returnAngles(cephalometryCoordinates) {
+  getANB(cephalometryCoordinates) {
+    let nasion = cephalometryCoordinates.find(coord => coord.name === "N");
+    let a = cephalometryCoordinates.find(coord => coord.name === "A");
+    let b = cephalometryCoordinates.find(coord => coord.name === "B");
+    var anb = this.getCephalometryAngle("ANB", nasion, a, nasion, b)
+    if (this.getSign(nasion, b, a) < 0) {
+      anb.angle = -Math.abs(anb.angle);
+    }
+    return anb.angle;
+  },
+
+  getMLNL(cephalometryCoordinates) {
+    let gnathion = cephalometryCoordinates.find(coord => coord.name === "Gn");
+    let gonion = cephalometryCoordinates.find(coord => coord.name === "tgo");
+    let pterygomaxillare = cephalometryCoordinates.find(coord => coord.name === "PNS");
+    let spina = cephalometryCoordinates.find(coord => coord.name === "ANS");
+    return this.getCephalometryAngle("ML-NL", gonion, gnathion, pterygomaxillare, spina).angle;
+
+  },
+
+  getN(cephalometryCoordinates) {
+    return this.getMLNL(cephalometryCoordinates);//TODO implement!!
+  },
+
+  getAngles(cephalometryCoordinates) {
     var angles = [];
     let nasion = cephalometryCoordinates.find(coord => coord.name === "N");
     let sella = cephalometryCoordinates.find(coord => coord.name === "S");

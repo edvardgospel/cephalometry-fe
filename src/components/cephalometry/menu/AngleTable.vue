@@ -15,7 +15,7 @@ export default {
   name: "AngleTable",
   computed: {
     cephalometricAngles() {
-      return AngleCalcualator.returnAngles(this.$store.getters.CEPHALOMETRY_COORDINATES);
+      return AngleCalcualator.getAngles(this.$store.getters.CEPHALOMETRY_COORDINATES);
     }
   }
 };

@@ -2,7 +2,7 @@
   <div class="harmony-table-content-div">
     <div class="inner-harmony-table-header-div">
       <div class="table-header-div">SNA</div>
-      <div class="table-header-div">NL-SNL</div>
+      <div class="table-header-div">NL-NSL</div>
       <div class="table-header-div">NSBa</div>
       <div class="table-header-div">ML-NSL</div>
       <div class="table-header-div">SNB</div>

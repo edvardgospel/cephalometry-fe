@@ -7,9 +7,9 @@ export default {
     let b = cephalometryCoordinates.find(coord => coord.name === "B");
     let pogonion = cephalometryCoordinates.find(coord => coord.name === "Pg");
     let gnathion = cephalometryCoordinates.find(coord => coord.name === "Gn");
-    //let basion = cephalometryCoordinates.find(coord => coord.name === "Ba");
+    let basion = cephalometryCoordinates.find(coord => coord.name === "Ba");
     let gonion = cephalometryCoordinates.find(coord => coord.name === "tgo");
-    //let articulare = cephalometryCoordinates.find(coord => coord.name === "Ar");
+    let articulare = cephalometryCoordinates.find(coord => coord.name === "Ar");
     let pterygomaxillare = cephalometryCoordinates.find(coord => coord.name === "PNS");
     let spina = cephalometryCoordinates.find(coord => coord.name === "ANS");
     let incisionSuperius = cephalometryCoordinates.find(coord => coord.name === "UI");
@@ -30,6 +30,8 @@ export default {
     lines.push(this.getCephalometryLine("Ī", incisionInferius, apicaleInferius));
     lines.push(this.getCephalometryLine("HL", pogonionSoft, upperLip));
     lines.push(this.getCephalometryLine("EL", pogonionSoft, noseBase));
+    lines.push(this.getCephalometryLine("Ar-tgo", articulare, gonion));
+    lines.push(this.getCephalometryLine("S-Ba", sella, basion));
     return lines;
   },
 

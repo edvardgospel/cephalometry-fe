@@ -4,7 +4,13 @@
       <form id="form-id" @submit.prevent="submitForm">
         <div class="inner-form-div">
           <div class="inner-input-div">
-            <input type="text" class="form-input-half-width" v-model="name" placeholder="Name" />
+            <input
+              type="text"
+              class="form-input-half-width"
+              v-model="name"
+              placeholder="Name"
+              maxlength="50"
+            />
           </div>
           <div class="radio-input-div">
             <input type="radio" id="male" v-model="gender" value="male" />
@@ -12,12 +18,44 @@
             <input type="radio" id="female" v-model="gender" value="female" />
             <label for="female">Female</label>
           </div>
-          <input type="text" class="form-input" v-model="address" placeholder="Address" />
-          <input type="text" class="form-input" v-model="phone" placeholder="Phone" />
-          <input type="text" class="form-input" v-model="doctor" placeholder="Doctor" />
-          <input type="text" class="form-input" v-model="birthDate" placeholder="Birthdate" />
-          <input type="text" class="form-input" v-model="xRayDate" placeholder="X-Ray date" />
-          <input type="text" class="form-input" v-model="remarks" placeholder="Remarks" />
+          <input
+            type="text"
+            class="form-input"
+            v-model="address"
+            placeholder="Address"
+            maxlength="50"
+          />
+          <input type="text" class="form-input" v-model="phone" placeholder="Phone" maxlength="15" />
+          <input
+            type="text"
+            class="form-input"
+            v-model="doctor"
+            placeholder="Doctor"
+            maxlength="50"
+          />
+          <input
+            type="text"
+            class="form-input"
+            :class="{red: (birthDate.length===10 && !isDateMatchesRegex(birthDate)) || (isAllInputFilled && !isDateMatchesRegex(birthDate))}"
+            v-model="birthDate"
+            placeholder="Birthdate                                                  (yyyy.mm.dd)"
+            maxlength="10"
+          />
+          <input
+            type="text"
+            class="form-input"
+            :class="{red: (xRayDate.length===10 && !isDateMatchesRegex(xRayDate)) || (isAllInputFilled && !isDateMatchesRegex(xRayDate))}"
+            v-model="xRayDate"
+            placeholder="X-Ray date                                               (yyyy.mm.dd)"
+            maxlength="10"
+          />
+          <textarea
+            class="form-textarea"
+            v-model="remarks"
+            placeholder="Remarks"
+            rows="3"
+            maxlength="1500"
+          />
         </div>
       </form>
     </div>
@@ -30,7 +68,7 @@
           type="submit"
           form="form-id"
           class="generate-button-unclickable"
-          :class="{'generate-button-clickable': isAllInputFilled()}"
+          :class="{'generate-button-clickable': isAllInputFilled && doesDatesMatchesRegex}"
         >Next</button>
       </div>
     </div>
@@ -42,49 +80,53 @@ export default {
   name: "CephalometryForm",
   data() {
     return {
-      name: null,
-      address: null,
-      phone: null,
-      gender: null,
-      doctor: null,
-      birthDate: null,
-      xRayDate: null,
-      remarks: null
+      name: "",
+      address: "",
+      phone: "",
+      gender: "",
+      doctor: "",
+      birthDate: "",
+      xRayDate: "",
+      remarks: "",
+      dateRegex: "([12]\\d{3}.(0[1-9]|1[0-2]).(0[1-9]|[12]\\d|3[01]))"
     };
   },
-  methods: {
-    resetForm() {
-      this.name = null;
-      this.address = null;
-      this.phone = null;
-      this.gender = null;
-      this.doctor = null;
-      this.birthDate = null;
-      this.xRayDate = null;
-      this.remarks = null;
-    },
+  computed: {
     isAllInputFilled() {
       return (
-        this.name !== null &&
         this.name !== "" &&
-        this.address !== null &&
         this.address !== "" &&
-        this.phone !== null &&
         this.phone !== "" &&
-        this.gender !== null &&
         this.gender !== "" &&
-        this.doctor !== null &&
         this.doctor !== "" &&
-        this.birthDate !== null &&
         this.birthDate !== "" &&
-        this.xRayDate !== null &&
         this.xRayDate !== "" &&
-        this.remarks !== null &&
         this.remarks !== ""
       );
     },
+    doesDatesMatchesRegex() {
+      return (
+        this.isDateMatchesRegex(this.birthDate) &&
+        this.isDateMatchesRegex(this.xRayDate)
+      );
+    }
+  },
+  methods: {
+    resetForm() {
+      this.name = "";
+      this.address = "";
+      this.phone = "";
+      this.gender = "";
+      this.doctor = "";
+      this.birthDate = "";
+      this.xRayDate = "";
+      this.remarks = "";
+    },
+    isDateMatchesRegex(date) {
+      return date.match(this.dateRegex);
+    },
     submitForm() {
-      if (this.isAllInputFilled()) {
+      if (this.isAllInputFilled && this.doesDatesMatchesRegex) {
         let personalData = {
           name: this.name,
           address: this.address,
@@ -133,11 +175,10 @@ form {
 }
 
 .form-input,
-.form-input-half-width {
+.form-input-half-width,
+.form-textarea {
   position: relative;
-  display: block;
   margin: 0 auto;
-  height: 1.5rem;
   float: left;
   margin-top: 2.5rem;
   padding-left: 3px;
@@ -150,12 +191,22 @@ form {
   border-bottom: 1px solid #dddddd;
 }
 
-.form-input {
+.form-input,
+.form-input-half-width {
+  height: 1.5rem;
+}
+
+.form-input,
+.form-textarea {
   width: 100%;
 }
 
 .form-input-half-width {
   width: 50%;
+}
+
+.form-textarea {
+  resize: none;
 }
 
 .radio-input-div {
@@ -191,13 +242,15 @@ input[type="radio"] {
   cursor: pointer;
 }
 
-input[type="date"]::before { 
-	content: attr(data-placeholder);
-	width: 100%;
+input[type="date"]::before {
+  content: attr(data-placeholder);
+  width: 100%;
 }
 
 input[type="date"]:focus::before,
-input[type="date"]:valid::before { display: none }
+input[type="date"]:valid::before {
+  display: none;
+}
 
 .generate-button-div {
   float: right;
@@ -228,5 +281,9 @@ input[type="date"]:valid::before { display: none }
   color: inherit;
   background-color: #f5f5f5;
   border-color: #f5f5f5;
+}
+
+.red {
+  color: red;
 }
 </style>

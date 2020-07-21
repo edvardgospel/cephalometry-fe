@@ -3,12 +3,21 @@
     <div class="form-div">
       <form id="form-id" @submit.prevent="submitForm">
         <div class="inner-form-div">
-          <input type="text" class="form-input" v-model="newANB" placeholder="New ANB" />
-          <input type="text" class="form-input" v-model="newMLNL" placeholder="New ML-NL" />
-          <input type="text" class="form-input" v-model="newN" placeholder="New N" />
-          <input type="text" class="form-input" v-model="condyl" placeholder="Condyl" />
-          <input type="text" class="form-input" v-model="canalisMand" placeholder="Canalis mand." />
-          <input type="text" class="form-input" v-model="mandibula" placeholder="Mandibula" />
+          <div class="form-header-div">
+            <span>Growth forecast</span>
+          </div>
+          <label class="form-input-label" for="newAnb">New ANB:</label>
+          <input type="text" class="form-input" id="newAnb" v-model="newANB" />
+          <label class="form-input-label" for="newMlNl">New ML-NL:</label>
+          <input type="text" class="form-input" id="newMlNl" v-model="newMLNL" />
+          <label class="form-input-label" for="newN">New N:</label>
+          <input type="text" class="form-input" id="newN" v-model="newN" />
+          <label class="form-input-label" for="condyl">Condyl:</label>
+          <input type="text" class="form-input" id="condyl" v-model="condyl" />
+          <label class="form-input-label" for="canalisMand">Canalis mand.:</label>
+          <input type="text" class="form-input" id="canalisMand" v-model="canalisMand" />
+          <label class="form-input-label" for="mandibula">Mandibula:</label>
+          <input type="text" class="form-input" id="mandibula" v-model="mandibula" />
         </div>
       </form>
     </div>
@@ -29,17 +38,33 @@
 </template>
 
 <script>
+import AngleCalcualator from "../resources/service/angle-calculator.js";
+
 export default {
   name: "CephalometryGrowthForecast",
   data() {
     return {
-      newANB: null,
-      newMLNL: null,
-      newN: null,
       condyl: null,
       canalisMand: null,
       mandibula: null
     };
+  },
+  computed: {
+    newANB() {
+      return AngleCalcualator.getANB(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(2);
+    },
+    newMLNL() {
+      return AngleCalcualator.getMLNL(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(2);
+    },
+    newN() {
+      return AngleCalcualator.getN(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(2);
+    }
   },
   methods: {
     resetForm() {
@@ -100,7 +125,7 @@ export default {
   border: 1px solid #dddddd;
 }
 
-form {
+#form-id {
   position: relative;
   height: 100%;
   width: 100%;
@@ -113,13 +138,23 @@ form {
   margin: 3rem auto;
 }
 
+.form-header-div {
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.form-input-label {
+  display: inline-block;
+  width: 28%;
+  text-align: cent;
+}
+
 .form-input {
   position: relative;
-  display: block;
-  width: 100%;
+  width: 70%;
   margin: 0 auto;
   height: 1.5rem;
-  float: left;
   margin-top: 2.5rem;
   padding-left: 3px;
   font-family: inherit;

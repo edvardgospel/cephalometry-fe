@@ -12,43 +12,33 @@
       <canvas id="canvas" width="640" height="600"></canvas>
       <div class="extra-space-div"></div>
       <div class="table-values-div">
-        <div v-for="el in sna" :key="el.id" :class="{red: el==snaAngle}">{{el}}</div>
+        <div class="values-div" v-for="el in sna" :key="el.id" :class="{red: el==snaAngle}">{{el}}</div>
       </div>
       <div class="table-values-div">
         <div
-          style="padding-bottom: 10.6px"
+          class="values-div"
           v-for="el in nl_nsl"
           :key="el.id"
           :class="{red: el==nlNslAngle}"
         >{{el}}</div>
       </div>
       <div class="table-values-div">
-        <div
-          style="padding-bottom: 23.5px"
-          v-for="el in nsba"
-          :key="el.id"
-          :class="{red: el==nsBaAngle}"
-        >{{el}}</div>
+        <div class="values-div" v-for="el in nsba" :key="el.id" :class="{red: el==nsBaAngle}">{{el}}</div>
       </div>
       <div class="table-values-div">
         <div
-          style="padding-bottom: 8.9px"
+          class="values-div"
           v-for="el in ml_nsl"
           :key="el.id"
           :class="{red: el==mlNslAngle}"
         >{{el}}</div>
       </div>
       <div class="table-values-div">
-        <div
-          style="padding-bottom: 5.5px"
-          v-for="el in snb"
-          :key="el.id"
-          :class="{red: el==snbAngle}"
-        >{{el}}</div>
+        <div class="values-div" v-for="el in snb" :key="el.id" :class="{red: el==snbAngle}">{{el}}</div>
       </div>
       <div class="table-values-div">
         <div
-          style="padding-bottom: 6.5px"
+          class="values-div"
           v-for="el in ml_nl"
           :key="el.id"
           :class="{red: el==mlNlAngle}"
@@ -219,7 +209,7 @@ export default {
 
       context = canvas.getContext("2d");
       context.beginPath();
-      context.setLineDash([15, 10]); /*dashes are 5px and spaces are 3px*/
+      context.setLineDash([15, 10]);
       context.moveTo(0, 320);
       context.lineTo(640, 320);
       context.stroke();
@@ -257,6 +247,12 @@ export default {
   scrollbar-width: none; /* Firefox */
 }
 
+#canvas {
+  display: block;
+  position: absolute;
+  z-index: -1;
+}
+
 .table-header-div,
 .table-values-div {
   float: left;
@@ -264,22 +260,27 @@ export default {
   width: 16.66%;
 }
 
+.table-header-div {
+  margin: 0.6rem auto;
+}
+
+.table-values-div {
+  height: 980px;
+  display: flex;
+  flex-direction: column;
+}
+
+.values-div {
+  flex: 1;
+  color: darkgrey;
+}
+
 .extra-space-div {
   height: 25%;
   width: 100%;
 }
 
-.table-header-div {
-  margin: 0.6rem auto;
-}
-
 .red {
   color: red;
-}
-
-canvas {
-  display: block;
-  position: absolute;
-  z-index: -1;
 }
 </style>

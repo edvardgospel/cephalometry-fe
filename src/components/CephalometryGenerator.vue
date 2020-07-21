@@ -65,7 +65,8 @@ export default {
         "tgo",
         "Pg soft",
         "N'",
-        "UL"
+        "UL",
+        "Tang"
       ],
       cephalometryCoordinates: [],
       index: 0

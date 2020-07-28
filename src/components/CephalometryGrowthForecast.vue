@@ -44,50 +44,42 @@ export default {
   name: "CephalometryGrowthForecast",
   data() {
     return {
-      condyl: null,
-      canalisMand: null,
-      mandibula: null
+      newANB: AngleCalcualator.getANB(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(1),
+      newMLNL: AngleCalcualator.getMLNL(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(1),
+      newN: AngleCalcualator.getN(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(1),
+      condyl: 0,
+      canalisMand: 0,
+      mandibula: 0,
     };
-  },
-  computed: {
-    newANB() {
-      return AngleCalcualator.getANB(
-        this.$store.getters.CEPHALOMETRY_COORDINATES
-      ).toFixed(2);
-    },
-    newMLNL() {
-      return AngleCalcualator.getMLNL(
-        this.$store.getters.CEPHALOMETRY_COORDINATES
-      ).toFixed(2);
-    },
-    newN() {
-      return AngleCalcualator.getN(
-        this.$store.getters.CEPHALOMETRY_COORDINATES
-      ).toFixed(2);
-    }
   },
   methods: {
     resetForm() {
-      this.newANB = null;
-      this.newMLNL = null;
-      this.newN = null;
-      this.condyl = null;
-      this.canalisMand = null;
-      this.mandibula = null;
+      this.newANB = AngleCalcualator.getANB(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(1);
+      this.newMLNL = AngleCalcualator.getMLNL(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(1);
+      this.newN = AngleCalcualator.getN(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(1);
+      this.condyl = 0;
+      this.canalisMand = 0;
+      this.mandibula = 0;
     },
     isAllInputFilled() {
       return (
-        this.newANB !== null &&
         this.newANB !== "" &&
-        this.newMLNL !== null &&
         this.newMLNL !== "" &&
-        this.newN !== null &&
         this.newN !== "" &&
-        this.condyl !== null &&
         this.condyl !== "" &&
-        this.canalisMand !== null &&
         this.canalisMand !== "" &&
-        this.mandibula !== null &&
         this.mandibula !== ""
       );
     },
@@ -99,13 +91,13 @@ export default {
           newN: this.newN,
           condyl: this.condyl,
           canalisMand: this.canalisMand,
-          mandibula: this.mandibula
+          mandibula: this.mandibula,
         };
         this.$store.commit("SET_GROWTH_FORECAST", growthForecast);
         this.$store.commit("NEXT_COMPONENT");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

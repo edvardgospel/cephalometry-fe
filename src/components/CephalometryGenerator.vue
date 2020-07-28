@@ -159,7 +159,7 @@ export default {
 }
 
 .image-div-remove-border {
-  border: none;
+  border: 1px solid #ffffff;
 }
 
 .inner-image-div {

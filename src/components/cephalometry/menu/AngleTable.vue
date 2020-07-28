@@ -1,10 +1,17 @@
 <template>
   <div class="angle-table-content-div">
+    <div id="infoBox" ref="infoBox" style="height: 100mm; position:absolute; left:-999em;"></div>
     <ul>
       <li
         v-for="cephalometricAngle in cephalometricAngles"
         :key="cephalometricAngle.name"
-      >{{ cephalometricAngle.name }}: {{cephalometricAngle.angle.toFixed(2)}}°</li>
+      >{{ cephalometricAngle.name }}: {{cephalometricAngle.angle.toFixed(1)}}°</li>
+    </ul>
+    <ul>
+      <li
+        v-for="cephalometricDistance in cephalometricDistances"
+        :key="cephalometricDistance.name"
+      >{{ cephalometricDistance.name }}: {{pixelToMillimeter(cephalometricDistance.distance).toFixed(1)}}</li>
     </ul>
     <ul>
       <li>Modified ANB: {{growthForecast.newANB}}</li>
@@ -19,16 +26,36 @@
 
 <script>
 import AngleCalcualator from "../../../resources/service/angle-calculator.js";
+import DistanceCalculator from "../../../resources/service/distance-calculator.js";
 export default {
   name: "AngleTable",
+  data() {
+    return {
+      height: 0
+    };
+  },
+  mounted() {
+    this.height = document.getElementById("infoBox").clientHeight
+  },
   computed: {
     cephalometricAngles() {
       return AngleCalcualator.getAngles(
         this.$store.getters.CEPHALOMETRY_COORDINATES
       );
     },
+    cephalometricDistances() {
+      return DistanceCalculator.getDistances(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      );
+    },
     growthForecast() {
       return this.$store.getters.GROWTH_FORECAST;
+    }
+  },
+  methods: {
+    pixelToMillimeter(px) {
+      let height = px / (this.height / 100);
+      return height;
     }
   }
 };
@@ -39,6 +66,7 @@ export default {
   height: 100%;
   width: 100%;
   margin: 0 auto;
+  overflow: scroll;
 }
 
 ul {

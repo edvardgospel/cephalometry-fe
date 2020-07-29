@@ -15,8 +15,8 @@ export default {
   name: "NavigationBar",
   props: {
     author: String,
-    email: String
-  }
+    email: String,
+  },
 };
 </script>
 

@@ -89,7 +89,7 @@ export default {
         "2",
         "·",
         "1",
-        "·"
+        "·",
       ],
       nsba: Array(142 - 121 + 1)
         .fill()
@@ -135,8 +135,8 @@ export default {
         "·",
         "14",
         "·",
-        "13"
-      ]
+        "13",
+      ],
     };
   },
   computed: {
@@ -147,34 +147,34 @@ export default {
     },
     snaAngle() {
       return this.cephalometricAngles
-        .find(angle => angle.name === "SNA")
+        .find((angle) => angle.name === "SNA")
         .angle.toFixed();
     },
     nlNslAngle() {
       return this.cephalometricAngles
-        .find(angle => angle.name === "NL-NSL")
+        .find((angle) => angle.name === "NL-NSL")
         .angle.toFixed();
     },
     nsBaAngle() {
       return this.cephalometricAngles
-        .find(angle => angle.name === "NSBa")
+        .find((angle) => angle.name === "NSBa")
         .angle.toFixed();
     },
     mlNslAngle() {
       return this.cephalometricAngles
-        .find(angle => angle.name === "ML-NSL")
+        .find((angle) => angle.name === "ML-NSL")
         .angle.toFixed();
     },
     snbAngle() {
       return this.cephalometricAngles
-        .find(angle => angle.name === "SNB")
+        .find((angle) => angle.name === "SNB")
         .angle.toFixed();
     },
     mlNlAngle() {
       return this.cephalometricAngles
-        .find(angle => angle.name === "ML-NL")
+        .find((angle) => angle.name === "ML-NL")
         .angle.toFixed();
-    }
+    },
   },
   mounted() {
     var canvas = document.getElementById("canvas");
@@ -214,7 +214,7 @@ export default {
       context.lineTo(640, 320);
       context.stroke();
     }
-  }
+  },
 };
 </script>
 

@@ -44,13 +44,13 @@ export default {
     PersonalData,
     AngleTable,
     HarmonyTable,
-    Xray
+    Xray,
   },
   data() {
     return {
-      currentComponent: "PersonalData" //[PersonalData, AngleTable, HarmonyTable, Xray]
+      currentComponent: "PersonalData", //[PersonalData, AngleTable, HarmonyTable, Xray]
     };
-  }
+  },
 };
 </script>
 

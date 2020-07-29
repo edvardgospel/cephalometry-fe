@@ -31,11 +31,11 @@ export default {
   name: "AngleTable",
   data() {
     return {
-      height: 0
+      height: 0,
     };
   },
   mounted() {
-    this.height = document.getElementById("infoBox").clientHeight
+    this.height = document.getElementById("infoBox").clientHeight;
   },
   computed: {
     cephalometricAngles() {
@@ -50,14 +50,14 @@ export default {
     },
     growthForecast() {
       return this.$store.getters.GROWTH_FORECAST;
-    }
+    },
   },
   methods: {
     pixelToMillimeter(px) {
       let height = px / (this.height / 100);
       return height;
-    }
-  }
+    },
+  },
 };
 </script>
 

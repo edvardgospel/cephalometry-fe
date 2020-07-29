@@ -26,13 +26,13 @@ export default {
     CephalometryGenerator,
     CephalometryGrowthForecast,
     CephalometryMenu,
-    Footer
+    Footer,
   },
   computed: {
     currentComponent() {
       return this.$store.getters.CURRENT_COMPONENT;
-    }
-  }
+    },
+  },
 };
 </script>
 

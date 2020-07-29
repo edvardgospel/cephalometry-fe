@@ -66,10 +66,10 @@ export default {
         "Pg soft",
         "UL",
         "Tang",
-        "N soft"
+        "N soft",
       ],
       cephalometryCoordinates: [],
-      index: 0
+      index: 0,
     };
   },
   methods: {
@@ -77,7 +77,7 @@ export default {
       var input = event.target; // Reference to the DOM input element
       if (input.files && input.files[0]) {
         var reader = new FileReader();
-        reader.onload = e => {
+        reader.onload = (e) => {
           this.cephalometricImage = e.target.result; // Callback, when FileReader finishes its job
         };
         reader.readAsDataURL(input.files[0]);
@@ -110,7 +110,7 @@ export default {
       let cephalometricCoordinate = {
         name: this.cephalometricPoints[this.index],
         x: event.offsetX,
-        y: event.offsetY
+        y: event.offsetY,
       };
       this.cephalometryCoordinates.push(cephalometricCoordinate);
     },
@@ -137,8 +137,8 @@ export default {
         this.cephalometryCoordinates
       );
       this.$store.commit("NEXT_COMPONENT");
-    }
-  }
+    },
+  },
 };
 </script>
 

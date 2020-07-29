@@ -33,8 +33,8 @@ export default {
     },
     cephalometryLines() {
       return LineCalculator.getLines(this.cephalometryCoordinates);
-    }
-  }
+    },
+  },
 };
 </script>
 

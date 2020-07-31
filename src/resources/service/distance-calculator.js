@@ -12,18 +12,16 @@ export default {
     let incisionSuperius = cephalometryCoordinates.find(coord => coord.name === "UI");
     let incisionInferius = cephalometryCoordinates.find(coord => coord.name === "LI");
 
-    distances.push(this.getCephalometryPointToLineDistance("I-NA mm", nasion, a, incisionSuperius));
-    distances.push(this.getCephalometryPointToLineDistance("Ī-NB mm", nasion, b, incisionInferius));
-    distances.push(this.getCephalometryPointToLineDistance("Ī-NPg mm", nasion, pogonion, incisionInferius));
-    distances.push(this.getCephalometryPointToLineDistance("Pg-NB mm", nasion, b, pogonion));
+    distances.push(this.getCephalometryPointToLineDistance("I-NA", nasion, a, incisionSuperius));
+    distances.push(this.getCephalometryPointToLineDistance("Ī-NB", nasion, b, incisionInferius));
+    distances.push(this.getCephalometryPointToLineDistance("Ī-NPg", nasion, pogonion, incisionInferius));
+    distances.push(this.getCephalometryPointToLineDistance("Pg-NB", nasion, b, pogonion));
 
     let spina_ = this.getTwoLineIntersection(pterygomaxillare, spina, nasion, gnathion);
-    let nSpMm = this.getCephalometryPointToPointDistance("N-Sp' mm", nasion, spina_);
+    let nSpMm = this.getCephalometryPointToPointDistance("N-Sp'", nasion, spina_);
     distances.push(nSpMm);
-    let spGnMm = this.getCephalometryPointToPointDistance("Sp'-Gn mm", spina_, gnathion);
+    let spGnMm = this.getCephalometryPointToPointDistance("Sp'-Gn", spina_, gnathion);
     distances.push(spGnMm);
-    distances.push(this.getCephalometryPointToPointDistance("N-Gn mm", nasion, gnathion));
-
     return distances;
   },
 

@@ -11,7 +11,7 @@
           class="meta-elements-span"
           :class="{'meta-elements-span-active': this.currentComponent  === 'PersonalData'}"
           @click="currentComponent = 'PersonalData';"
-        >Personal data</span>
+        >Personal</span>
         <span
           class="meta-elements-span"
           :class="{'meta-elements-span-active':  this.currentComponent  === 'AngleTable'}"
@@ -21,7 +21,7 @@
           class="meta-elements-span"
           :class="{'meta-elements-span-active':  this.currentComponent  === 'HarmonyTable'}"
           @click="currentComponent = 'HarmonyTable'"
-        >Harmony table</span>
+        >Harmony</span>
         <span
           class="meta-elements-span"
           :class="{'meta-elements-span-active':  this.currentComponent  === 'Xray'}"

@@ -65,6 +65,7 @@ export default {
         "Ar",
         "Pg soft",
         "UL",
+        "Sn",
         "Tang",
         "N soft",
       ],

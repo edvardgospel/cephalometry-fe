@@ -11,12 +11,18 @@
       <li
         v-for="cephalometricDistance in cephalometricDistances"
         :key="cephalometricDistance.name"
-      >{{ cephalometricDistance.name }}: {{pixelToMillimeter(cephalometricDistance.distance).toFixed(1)}}</li>
+      >{{ cephalometricDistance.name }}: {{pixelToMillimeter(cephalometricDistance.distance).toFixed(1)}} mm</li>
+      <li>
+        Index: {{(pixelToMillimeter(cephalometricDistances[cephalometricDistances.length-2].distance).toFixed(1) /
+        pixelToMillimeter(cephalometricDistances[cephalometricDistances.length-1].distance).toFixed(1) * 100).toFixed(1)}}%
+      </li>
     </ul>
     <ul>
       <li>Modified ANB: {{growthForecast.newANB}}</li>
       <li>Modified ML-NL: {{growthForecast.newMLNL}}</li>
       <li>Modified N: {{growthForecast.newN}}</li>
+    </ul>
+    <ul>
       <li>Condylus: {{growthForecast.condyl}}</li>
       <li>Canalis mandibula: {{growthForecast.canalisMand}}</li>
       <li>Mandibula: {{growthForecast.mandibula}}</li>

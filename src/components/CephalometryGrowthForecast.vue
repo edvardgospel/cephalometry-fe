@@ -117,7 +117,7 @@ export default {
       return false;
     },
     submitForm() {
-      if (this.isAllInputFilled()) {
+      if (this.isAllInputFilled) {
         let growthForecast = {
           newANB: this.newANB,
           newMLNL: this.newMLNL,

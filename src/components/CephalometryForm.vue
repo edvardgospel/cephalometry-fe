@@ -52,7 +52,7 @@
           <textarea
             class="form-textarea"
             v-model="remarks"
-            placeholder="Remarks"
+            placeholder="Remarks                                                        (optional)"
             rows="3"
             maxlength="1500"
           />
@@ -80,15 +80,15 @@ export default {
   name: "CephalometryForm",
   data() {
     return {
-      name: "",
-      address: "",
-      phone: "",
-      gender: "",
-      doctor: "",
-      birthDate: "",
-      xRayDate: "",
-      remarks: "",
-      dateRegex: "([12]\\d{3}.(0[1-9]|1[0-2]).(0[1-9]|[12]\\d|3[01]))"
+      name: "Edvard Eros", //""
+      address: "Satu Mare", //""
+      phone: "30 162 1442", //...
+      gender: "male",
+      doctor: "Dr. Csibi",
+      birthDate: "1995.02.12",
+      xRayDate: "2020.07.28",
+      remarks: "", //TODO!!
+      dateRegex: "([12]\\d{3}.(0[1-9]|1[0-2]).(0[1-9]|[12]\\d|3[01]))",
     };
   },
   computed: {
@@ -100,8 +100,7 @@ export default {
         this.gender !== "" &&
         this.doctor !== "" &&
         this.birthDate !== "" &&
-        this.xRayDate !== "" &&
-        this.remarks !== ""
+        this.xRayDate !== ""
       );
     },
     doesDatesMatchesRegex() {
@@ -109,7 +108,7 @@ export default {
         this.isDateMatchesRegex(this.birthDate) &&
         this.isDateMatchesRegex(this.xRayDate)
       );
-    }
+    },
   },
   methods: {
     resetForm() {
@@ -135,13 +134,13 @@ export default {
           doctor: this.doctor,
           birthDate: this.birthDate,
           xRayDate: this.xRayDate,
-          remarks: this.remarks
+          remarks: this.remarks,
         };
         this.$store.commit("SET_PERSONAL_DATA", personalData);
         this.$store.commit("NEXT_COMPONENT");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

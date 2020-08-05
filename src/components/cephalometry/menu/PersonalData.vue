@@ -19,8 +19,8 @@ export default {
   computed: {
     personalData() {
       return this.$store.getters.PERSONAL_DATA;
-    }
-  }
+    },
+  },
 };
 </script>
 

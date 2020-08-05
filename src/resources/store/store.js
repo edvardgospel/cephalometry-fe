@@ -10,7 +10,9 @@ export const store = new Vuex.Store({
     personalData: null,
     cephalometricImage: null,
     cephalometryCoordinates: null,
-    growthForecast: null
+    growthForecast: null,
+    harmonyTableHtmlElement: null,
+    cephalometricImageHtmlElement: null
   },
   getters: {
     CURRENT_COMPONENT(state) {
@@ -27,6 +29,12 @@ export const store = new Vuex.Store({
     },
     GROWTH_FORECAST(state) {
       return state.growthForecast;
+    },
+    HARMONY_TABLE_HTML_ELEMENT(state) {
+      return state.harmonyTableHtmlElement;
+    },
+    CEPHALOMETRIC_IMAGE_HTML_ELEMENT(state) {
+      return state.cephalometricImageHtmlElement;
     }
   },
   mutations: {
@@ -44,6 +52,14 @@ export const store = new Vuex.Store({
     },
     SET_GROWTH_FORECAST(state, growthForecast) {
       state.growthForecast = growthForecast;
+    },
+    SET_HARMONY_TABLE_HTML_ELEMENT(state, harmonyTableHtmlElement) {
+      console.log("Harmony: " + harmonyTableHtmlElement)
+      state.harmonyTableHtmlElement = harmonyTableHtmlElement;
+    },
+    SET_CEPHALOMETRIC_IMAGE_HTML_ELEMENT(state, cephalometricImageHtmlElement) {
+      console.log("Image: " + cephalometricImageHtmlElement)
+      state.cephalometricImageHtmlElement = cephalometricImageHtmlElement;
     }
   }
 })

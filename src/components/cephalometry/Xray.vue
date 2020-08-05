@@ -23,6 +23,10 @@ export default {
       }
       context.stroke();
     }
+    this.$store.commit(
+      "SET_CEPHALOMETRIC_IMAGE_HTML_ELEMENT",
+      document.getElementById("xray-div-id")
+    );
   },
   computed: {
     cephalometricImage() {
@@ -33,8 +37,8 @@ export default {
     },
     cephalometryLines() {
       return LineCalculator.getLines(this.cephalometryCoordinates);
-    }
-  }
+    },
+  },
 };
 </script>
 

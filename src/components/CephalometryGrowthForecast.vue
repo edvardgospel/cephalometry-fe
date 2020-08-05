@@ -6,18 +6,36 @@
           <div class="form-header-div">
             <span>Growth forecast</span>
           </div>
-          <label class="form-input-label" for="newAnb">New ANB:</label>
+          <label class="form-input-label" for="newAnb">Modified ANB:</label>
           <input type="text" class="form-input" id="newAnb" v-model="newANB" />
-          <label class="form-input-label" for="newMlNl">New ML-NL:</label>
+          <label class="form-input-label" for="newMlNl">Modified ML-NL:</label>
           <input type="text" class="form-input" id="newMlNl" v-model="newMLNL" />
-          <label class="form-input-label" for="newN">New N:</label>
+          <label class="form-input-label" for="newN">Modified N:</label>
           <input type="text" class="form-input" id="newN" v-model="newN" />
-          <label class="form-input-label" for="condyl">Condyl:</label>
-          <input type="text" class="form-input" id="condyl" v-model="condyl" />
-          <label class="form-input-label" for="canalisMand">Canalis mand.:</label>
-          <input type="text" class="form-input" id="canalisMand" v-model="canalisMand" />
+          <label class="form-input-label" for="condyl">Condylus:</label>
+          <input
+            type="text"
+            class="form-input"
+            :class="{red: !isCorrectValue(condyl)}"
+            id="condyl"
+            v-model="condyl"
+          />
+          <label class="form-input-label" for="canalisMand">Canalis mandibulae:</label>
+          <input
+            type="text"
+            class="form-input"
+            :class="{red: !isCorrectValue(canalisMand)}"
+            id="canalisMand"
+            v-model="canalisMand"
+          />
           <label class="form-input-label" for="mandibula">Mandibula:</label>
-          <input type="text" class="form-input" id="mandibula" v-model="mandibula" />
+          <input
+            type="text"
+            class="form-input"
+            :class="{red: !isCorrectValue(mandibula)}"
+            id="mandibula"
+            v-model="mandibula"
+          />
         </div>
       </form>
     </div>
@@ -30,7 +48,7 @@
           type="submit"
           form="form-id"
           class="generate-button-unclickable"
-          :class="{'generate-button-clickable': isAllInputFilled()}"
+          :class="{'generate-button-clickable': isAllInputFilled && areCorrectValues}"
         >Next</button>
       </div>
     </div>
@@ -44,68 +62,75 @@ export default {
   name: "CephalometryGrowthForecast",
   data() {
     return {
-      condyl: null,
-      canalisMand: null,
-      mandibula: null
+      newANB: AngleCalcualator.getANB(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(1),
+      newMLNL: AngleCalcualator.getMLNL(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(1),
+      newN: AngleCalcualator.getN(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(1),
+      condyl: "0",
+      canalisMand: "0",
+      mandibula: "0",
     };
   },
   computed: {
-    newANB() {
-      return AngleCalcualator.getANB(
-        this.$store.getters.CEPHALOMETRY_COORDINATES
-      ).toFixed(2);
+    isAllInputFilled() {
+      return (
+        this.newANB !== "" &&
+        this.newMLNL !== "" &&
+        this.newN !== "" &&
+        this.condyl !== "" &&
+        this.canalisMand !== "" &&
+        this.mandibula !== ""
+      );
     },
-    newMLNL() {
-      return AngleCalcualator.getMLNL(
-        this.$store.getters.CEPHALOMETRY_COORDINATES
-      ).toFixed(2);
-    },
-    newN() {
-      return AngleCalcualator.getN(
-        this.$store.getters.CEPHALOMETRY_COORDINATES
-      ).toFixed(2);
+    areCorrectValues() {
+      return (
+        this.isCorrectValue(this.condyl) &&
+        this.isCorrectValue(this.canalisMand) &&
+        this.isCorrectValue(this.mandibula)
+      );
     }
   },
   methods: {
     resetForm() {
-      this.newANB = null;
-      this.newMLNL = null;
-      this.newN = null;
-      this.condyl = null;
-      this.canalisMand = null;
-      this.mandibula = null;
+      this.newANB = AngleCalcualator.getANB(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(1);
+      this.newMLNL = AngleCalcualator.getMLNL(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(1);
+      this.newN = AngleCalcualator.getN(
+        this.$store.getters.CEPHALOMETRY_COORDINATES
+      ).toFixed(1);
+      this.condyl = "0";
+      this.canalisMand = "0";
+      this.mandibula = "0";
     },
-    isAllInputFilled() {
-      return (
-        this.newANB !== null &&
-        this.newANB !== "" &&
-        this.newMLNL !== null &&
-        this.newMLNL !== "" &&
-        this.newN !== null &&
-        this.newN !== "" &&
-        this.condyl !== null &&
-        this.condyl !== "" &&
-        this.canalisMand !== null &&
-        this.canalisMand !== "" &&
-        this.mandibula !== null &&
-        this.mandibula !== ""
-      );
+    isCorrectValue(value) {
+      if (["-3", "-2", "-1", "0", "1", "2", "3", ""].includes(value)) {
+        return true;
+      }
+      return false;
     },
     submitForm() {
-      if (this.isAllInputFilled()) {
+      if (this.isAllInputFilled) {
         let growthForecast = {
           newANB: this.newANB,
           newMLNL: this.newMLNL,
           newN: this.newN,
           condyl: this.condyl,
           canalisMand: this.canalisMand,
-          mandibula: this.mandibula
+          mandibula: this.mandibula,
         };
         this.$store.commit("SET_GROWTH_FORECAST", growthForecast);
         this.$store.commit("NEXT_COMPONENT");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -146,13 +171,13 @@ export default {
 
 .form-input-label {
   display: inline-block;
-  width: 28%;
+  width: 38%;
   text-align: cent;
 }
 
 .form-input {
   position: relative;
-  width: 70%;
+  width: 60%;
   margin: 0 auto;
   height: 1.5rem;
   margin-top: 2.5rem;
@@ -215,5 +240,9 @@ export default {
   color: inherit;
   background-color: #f5f5f5;
   border-color: #f5f5f5;
+}
+
+.red {
+  color: red;
 }
 </style>

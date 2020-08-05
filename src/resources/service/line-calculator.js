@@ -23,15 +23,18 @@ export default {
     lines.push(this.getCephalometryLine("NSL", nasion, sella));
     lines.push(this.getCephalometryLine("NL", pterygomaxillare, spina));
     lines.push(this.getCephalometryLine("ML", gnathion, gonion));
-    lines.push(this.getCephalometryLine("NAL", nasion, a));
-    lines.push(this.getCephalometryLine("NBL", nasion, b));
-    lines.push(this.getCephalometryLine("NPgL", nasion, pogonion));
+    //lines.push(this.getCephalometryLine("NAL", nasion, a));
+    //lines.push(this.getCephalometryLine("NBL", nasion, b));
+    //lines.push(this.getCephalometryLine("NPgL", nasion, pogonion));
     lines.push(this.getCephalometryLine("I", incisionSuperius, apicaleSuperius));
     lines.push(this.getCephalometryLine("Ī", incisionInferius, apicaleInferius));
     lines.push(this.getCephalometryLine("HL", pogonionSoft, upperLip));
     lines.push(this.getCephalometryLine("EL", pogonionSoft, noseBase));
     lines.push(this.getCephalometryLine("Ar-tgo", articulare, gonion));
     lines.push(this.getCephalometryLine("S-Ba", sella, basion));
+    lines.push(this.getCephalometryLine("Gn-Pg", gnathion, pogonion));
+    lines.push(this.getCephalometryLine("Pg-B", pogonion, b));
+    lines.push(this.getCephalometryLine("ANS-A", spina, a));
     return lines;
   },
 

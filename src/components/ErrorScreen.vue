@@ -17,8 +17,8 @@
 export default {
   name: "ErrorScreen",
   props: {
-    error: Error
-  }
+    error: Error,
+  },
 };
 </script>
 

@@ -8,7 +8,11 @@
       <div class="table-header-div">SNB</div>
       <div class="table-header-div">ML-NL</div>
     </div>
-    <div class="inner-harmony-table-values-div">
+    <div
+      class="inner-harmony-table-values-div"
+      id="inner-harmony-table-values-div-id"
+      v-keep-scroll-position
+    >
       <canvas id="canvas" width="640" height="600"></canvas>
       <div class="extra-space-div"></div>
       <div class="table-values-div">
@@ -214,6 +218,10 @@ export default {
       context.lineTo(640, 320);
       context.stroke();
     }
+    this.$store.commit(
+      "SET_HARMONY_TABLE_HTML_ELEMENT",
+      document.getElementById("inner-harmony-table-values-div-id")
+    );
   },
 };
 </script>

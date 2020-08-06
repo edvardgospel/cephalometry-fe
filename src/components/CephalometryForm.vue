@@ -80,14 +80,14 @@ export default {
   name: "CephalometryForm",
   data() {
     return {
-      name: "Edvard Eros", //""
-      address: "Satu Mare", //""
-      phone: "30 162 1442", //...
-      gender: "male",
-      doctor: "Dr. Csibi",
-      birthDate: "1995.02.12",
-      xRayDate: "2020.07.28",
-      remarks: "", //TODO!!
+      name: "",
+      address: "",
+      phone: "",
+      gender: "",
+      doctor: "",
+      birthDate: "",
+      xRayDate: "",
+      remarks: "",
       dateRegex: "([12]\\d{3}.(0[1-9]|1[0-2]).(0[1-9]|[12]\\d|3[01]))",
     };
   },

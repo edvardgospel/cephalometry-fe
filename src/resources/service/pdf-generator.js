@@ -1,5 +1,3 @@
-import AngleCalcualator from "./angle-calculator.js";
-import DistanceCalculator from "./distance-calculator.js";
 import JsPDF from "jspdf"
 import html2canvas from "html2canvas";
 import { store } from "../store/store.js";
@@ -7,95 +5,137 @@ window.html2canvas = html2canvas;
 
 export default {
   savePDF() {
-    const personalData = this.getPersonalData();
-    const growthForecast = this.getGrowthForecast();
-    const angles = this.getCephalometryAngles();
-    const distances = this.getCephalometryDistances();
-
-    var pdf = new JsPDF("p", "mm", "a4");
+    const personalData = getPersonalData();
+    const growthForecast = getGrowthForecast();
+    const angles = getCephalometryAngles();
+    const distances = getCephalometryDistancesInMM();
+    const pdf = new JsPDF("p", "mm", "a4");
     const pageWidth = pdf.internal.pageSize.getWidth();
 
+    var currentHeight = 15;
+    var currentWidth = pageWidth / 2;
     pdf.setTextColor("#2c3e50");
-
+    pdf.setDrawColor("#2c3e50");
     pdf.setFontSize(22);
-    pdf.text("Cephalometry", pageWidth / 2, 15, "center");
+    pdf.text("Cephalometry", currentWidth, currentHeight, "center");
 
-    pdf.setFontSize(15);
-    pdf.text("Personal data", 10, 28);
 
-    var currentHeight = 30;
-    pdf.setFontSize(12);
-    pdf.text("Name: " + personalData.name, 12, currentHeight += 5);
-    pdf.text("Address: " + personalData.address, 12, currentHeight += 5);
-    pdf.text("Phone: " + personalData.phone, 12, currentHeight += 5);
-    pdf.text("Gender: " + personalData.gender, 12, currentHeight += 5);
-    pdf.text("Doctor: " + personalData.doctor, 12, currentHeight += 5);
-    pdf.text("Birthdate: " + personalData.birthDate, 12, currentHeight += 5);
-    pdf.text("X-ray date: " + personalData.xRayDate, 12, currentHeight += 5);
-
-    pdf.setFontSize(15);
-    pdf.text("Angles", pageWidth / 2 - 12, 28);
-    
-    pdf.setFontSize(12);
+    //// Personal data ////
     currentHeight = 30;
+    currentWidth = 22;
+    pdf.setFontSize(15);
+    pdf.text("Personal data", currentWidth - 2, currentHeight - 2);
+    pdf.setFontSize(12);
+    pdf.text(`Name: ${personalData.name}`, currentWidth, currentHeight += 5);
+    pdf.text(`Address: ${personalData.address}`, currentWidth, currentHeight += 5);
+    pdf.text(`Gender: ${personalData.gender}`, currentWidth, currentHeight += 5);
+    pdf.text(`Phone: ${personalData.phone}`, currentWidth, currentHeight += 5);
+    pdf.text(`Doctor: ${personalData.doctor}`, currentWidth, currentHeight += 5);
+    pdf.text(`Birthdate: ${personalData.birthDate}`, currentWidth, currentHeight += 5);
+    pdf.text(`X-ray date: ${personalData.xRayDate}`, currentWidth, currentHeight += 5);
+
+
+    //// Angles ////
+    currentHeight = 30;
+    currentWidth = pageWidth / 2 - 10;
+    pdf.setFontSize(15);
+    pdf.text("Angles", currentWidth - 2, currentHeight - 2);
+    pdf.setFontSize(12);
     for (let angle of angles) {
-      pdf.text(angle.name + ": " + angle.angle.toFixed(1), pageWidth / 2 - 10, currentHeight += 5);
+      if (angle.name.includes("Ī")) {
+        pdf.text(`${angle.name.replace("Ī", "I")}: ${angle.angle.toFixed(1)}°`, currentWidth, currentHeight += 5);
+      } else {
+        pdf.text(`${angle.name}: ${angle.angle.toFixed(1)}°`, currentWidth, currentHeight += 5);
+      }
+      if (angle.name.includes("I-Ī")) {
+        pdf.line(currentWidth, currentHeight + 0.5, currentWidth + 1.2, currentHeight + 0.5);
+        pdf.line(currentWidth + 2.6, currentHeight - 3.4, currentWidth + 3.8, currentHeight - 3.4);
+      }
+      if (angle.name.includes("I-NA")) {
+        pdf.line(currentWidth, currentHeight + 0.5, currentWidth + 1.2, currentHeight + 0.5);
+      }
+      if (angle.name.includes("Ī-NB")) {
+        pdf.line(currentWidth, currentHeight - 3.4, currentWidth + 1.2, currentHeight - 3.4);
+      }
     }
 
-    pdf.setFontSize(15);
-    pdf.text("Distances", pageWidth / 1.4 - 2, 28);
 
-    pdf.setFontSize(12);
+    //// Distances ////
     currentHeight = 30;
-    for (let distance of distances) {
-      pdf.text(distance.name + ": " + distance.distance.toFixed(1), pageWidth / 1.4, currentHeight += 5);
-    }
-    pdf.text("Index: " + (distances[distances.length - 2].distance / distances[distances.length - 1].distance * 100).toFixed(1) + "%", pageWidth / 1.4, currentHeight += 5); //TODO!!
-
+    currentWidth = pageWidth / 1.4;
     pdf.setFontSize(15);
-    pdf.text("Growth forecast", pageWidth / 1.4 - 2, currentHeight += 10);
-    
+    pdf.text("Distances", currentWidth - 2, currentHeight - 2);
     pdf.setFontSize(12);
-    pdf.text("Modified ANB: " + growthForecast.newANB, pageWidth / 1.4, currentHeight += 7);
-    pdf.text("Modified ML-NL: " + growthForecast.newMLNL, pageWidth / 1.4, currentHeight += 5);
-    pdf.text("Modified N: " + growthForecast.newANB, pageWidth / 1.4, currentHeight += 5);
-    pdf.text("Condylus: " + growthForecast.condyl, pageWidth / 1.4, currentHeight += 5);
-    pdf.text("Canalis mandibula: " + growthForecast.canalisMand, pageWidth / 1.4, currentHeight += 5);
-    pdf.text("Mandibula: " + growthForecast.mandibula, pageWidth / 1.4, currentHeight += 5);
+    for (let distance of distances) {
+      if (distance.name.includes("Ī")) {
+        pdf.text(`${distance.name.replace("Ī", "I")}: ${distance.distance.toFixed(1)} mm`, currentWidth, currentHeight += 5);
+      } else {
+        pdf.text(`${distance.name}: ${distance.distance.toFixed(1)} mm`, currentWidth, currentHeight += 5);
+      }
+      if (distance.name.includes("I-NA")) {
+        pdf.line(currentWidth, currentHeight + 0.5, currentWidth + 1.2, currentHeight + 0.5);
+      }
+      if (distance.name.includes("Ī-NB")) {
+        pdf.line(currentWidth, currentHeight - 3.4, currentWidth + 1.2, currentHeight - 3.4);
+      }
+      if (distance.name.includes("Ī-NPg")) {
+        pdf.line(currentWidth, currentHeight - 3.4, currentWidth + 1.2, currentHeight - 3.4);
+      }
+    }
+    pdf.text(`Index: ${(distances[distances.length - 2].distance / distances[distances.length - 1].distance * 100).toFixed(1)}%`,
+      currentWidth, currentHeight += 5); //TODO!!
 
-    const promises = []
-    promises.push(html2canvas(this.getCephalometricImageHtmlElement()));
-    promises.push(html2canvas(this.getHarmonyTableHtmlElement()));
+
+    //// Growth forecast ////
+    currentWidth = pageWidth / 1.4;
+    pdf.setFontSize(15);
+    pdf.text("Growth forecast", currentWidth - 2, currentHeight += 10);
+    pdf.setFontSize(12);
+    pdf.text(`Modified ANB: ${growthForecast.newANB}°`, currentWidth, currentHeight += 7);
+    pdf.text(`Modified ML-NL: ${growthForecast.newMLNL}°`, currentWidth, currentHeight += 5);
+    pdf.text(`Modified N: ${growthForecast.newN}°`, currentWidth, currentHeight += 5);
+    pdf.text(`Condylus: ${growthForecast.condyl}`, currentWidth, currentHeight += 5);
+    pdf.text(`Canalis mandibula: ${growthForecast.canalisMand}`, currentWidth, currentHeight += 5);
+    pdf.text(`Mandibula: ${growthForecast.mandibula}`, currentWidth, currentHeight += 5);
+
+
+    //// Images ////   
+    const promises = [];
+    promises.push(html2canvas(getCephalometricImageHtmlElement()));
+    promises.push(html2canvas(getHarmonyTableHtmlElement()));
     Promise.all(promises).then(canvas => {
-      pdf.addImage(canvas[0], "JPEG", 10, currentHeight += 15, canvas[0].width / 5, canvas[0].height / 5);
+      var imageWidth = pageWidth - 60;
+      var imageHeight = imageWidth * canvas[0].height / canvas[0].width
+      pdf.addImage(canvas[0], "JPEG", 30, currentHeight += 10, imageWidth, imageHeight);
       pdf.addPage();
-      pdf.addImage(canvas[1], "JPEG", 10, 10, canvas[1].width / 5, canvas[1].height / 5);
-      pdf.text("Remarks: " + (personalData.remarks ? personalData.remarks : "-"), 10, canvas[1].height / 5 + 20);
+      imageHeight = imageWidth * canvas[1].height / canvas[1].width;
+      pdf.addImage(canvas[1], "JPEG", 30, 10, imageWidth, imageHeight);
+      pdf.text(`Remarks: ${personalData.remarks ? personalData.remarks : "-"}`, 20, imageHeight + 20);
       pdf.save(personalData.name.replace(" ", "_") + "_" + personalData.xRayDate + ".pdf");
     });
-  },
+  }
+}
 
-  getPersonalData() {
-    return store.getters.PERSONAL_DATA;
-  },
+function getPersonalData() {
+  return store.getters.PERSONAL_DATA;
+}
 
-  getGrowthForecast() {
-    return store.getters.GROWTH_FORECAST;
-  },
+function getGrowthForecast() {
+  return store.getters.GROWTH_FORECAST;
+}
 
-  getCephalometryAngles() {
-    return AngleCalcualator.getAngles(store.getters.CEPHALOMETRY_COORDINATES);
-  },
+function getCephalometryAngles() {
+  return store.getters.CEPHALOMETRY_ANGLES;
+}
 
-  getCephalometryDistances() {
-    return DistanceCalculator.getDistances(store.getters.CEPHALOMETRY_COORDINATES);
-  },
+function getCephalometryDistancesInMM() {
+  return store.getters.CEPHALOMETRY_DISTANCES_IN_MM;
+}
 
-  getCephalometricImageHtmlElement() {
-    return store.getters.CEPHALOMETRIC_IMAGE_HTML_ELEMENT;
-  },
+function getCephalometricImageHtmlElement() {
+  return store.getters.CEPHALOMETRIC_IMAGE_HTML_ELEMENT;
+}
 
-  getHarmonyTableHtmlElement() {
-    return store.getters.HARMONY_TABLE_HTML_ELEMENT;
-  },
+function getHarmonyTableHtmlElement() {
+  return store.getters.HARMONY_TABLE_HTML_ELEMENT;
 }

@@ -18,9 +18,9 @@
       </li>
     </ul>
     <ul>
-      <li>Modified ANB: {{growthForecast.newANB}}</li>
-      <li>Modified ML-NL: {{growthForecast.newMLNL}}</li>
-      <li>Modified N: {{growthForecast.newN}}</li>
+      <li>Modified ANB: {{growthForecast.newANB}}°</li>
+      <li>Modified ML-NL: {{growthForecast.newMLNL}}°</li>
+      <li>Modified N: {{growthForecast.newN}}°</li>
     </ul>
     <ul>
       <li>Condylus: {{growthForecast.condyl}}</li>

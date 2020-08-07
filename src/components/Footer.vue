@@ -2,9 +2,9 @@
   <footer>
     <div class="footer-div">
       <div class="inner-footer-div">
-        <span>Author: {{author}}</span>
+        <span>{{author}}</span>
         <br />
-        <span>Email: {{email}}</span>
+        <span>{{email}}</span>
       </div>
     </div>
   </footer>

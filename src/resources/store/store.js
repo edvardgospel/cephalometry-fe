@@ -12,7 +12,9 @@ export const store = new Vuex.Store({
     cephalometryCoordinates: null,
     growthForecast: null,
     harmonyTableHtmlElement: null,
-    cephalometricImageHtmlElement: null
+    cephalometricImageHtmlElement: null,
+    cephalometryAngles: null,
+    cephalometryDistancesInMM: null
   },
   getters: {
     CURRENT_COMPONENT(state) {
@@ -35,6 +37,12 @@ export const store = new Vuex.Store({
     },
     CEPHALOMETRIC_IMAGE_HTML_ELEMENT(state) {
       return state.cephalometricImageHtmlElement;
+    },
+    CEPHALOMETRY_ANGLES(state) {
+      return state.cephalometryAngles;
+    },
+    CEPHALOMETRY_DISTANCES_IN_MM(state) {
+      return state.cephalometryDistancesInMM;
     }
   },
   mutations: {
@@ -54,12 +62,16 @@ export const store = new Vuex.Store({
       state.growthForecast = growthForecast;
     },
     SET_HARMONY_TABLE_HTML_ELEMENT(state, harmonyTableHtmlElement) {
-      console.log("Harmony: " + harmonyTableHtmlElement)
       state.harmonyTableHtmlElement = harmonyTableHtmlElement;
     },
     SET_CEPHALOMETRIC_IMAGE_HTML_ELEMENT(state, cephalometricImageHtmlElement) {
-      console.log("Image: " + cephalometricImageHtmlElement)
       state.cephalometricImageHtmlElement = cephalometricImageHtmlElement;
+    },
+    SET_CEPHALOMETRY_ANGLES(state, cephalometryAngles) {
+      state.cephalometryAngles = cephalometryAngles;
+    },
+    SET_CEPHALOMETRY_DISTANCES_IN_MM(state, cephalometryDistancesInMM) {
+      state.cephalometryDistancesInMM = cephalometryDistancesInMM;
     }
   }
 })

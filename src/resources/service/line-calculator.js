@@ -20,37 +20,37 @@ export default {
     let upperLip = cephalometryCoordinates.find(coord => coord.name === "UL");
     let noseBase = cephalometryCoordinates.find(coord => coord.name === "Tang")
 
-    lines.push(this.getCephalometryLine("NSL", nasion, sella));
-    lines.push(this.getCephalometryLine("NL", pterygomaxillare, spina));
-    lines.push(this.getCephalometryLine("ML", gnathion, gonion));
-    //lines.push(this.getCephalometryLine("NAL", nasion, a));
-    //lines.push(this.getCephalometryLine("NBL", nasion, b));
-    //lines.push(this.getCephalometryLine("NPgL", nasion, pogonion));
-    lines.push(this.getCephalometryLine("I", incisionSuperius, apicaleSuperius));
-    lines.push(this.getCephalometryLine("Ī", incisionInferius, apicaleInferius));
-    lines.push(this.getCephalometryLine("HL", pogonionSoft, upperLip));
-    lines.push(this.getCephalometryLine("EL", pogonionSoft, noseBase));
-    lines.push(this.getCephalometryLine("Ar-tgo", articulare, gonion));
-    lines.push(this.getCephalometryLine("S-Ba", sella, basion));
-    lines.push(this.getCephalometryLine("Gn-Pg", gnathion, pogonion));
-    lines.push(this.getCephalometryLine("Pg-B", pogonion, b));
-    lines.push(this.getCephalometryLine("ANS-A", spina, a));
+    lines.push(getCephalometryLine("NSL", nasion, sella));
+    lines.push(getCephalometryLine("NL", pterygomaxillare, spina));
+    lines.push(getCephalometryLine("ML", gnathion, gonion));
+    //lines.push(getCephalometryLine("NAL", nasion, a));
+    //lines.push(getCephalometryLine("NBL", nasion, b));
+    //lines.push(getCephalometryLine("NPgL", nasion, pogonion));
+    lines.push(getCephalometryLine("I", incisionSuperius, apicaleSuperius));
+    lines.push(getCephalometryLine("Ī", incisionInferius, apicaleInferius));
+    lines.push(getCephalometryLine("HL", pogonionSoft, upperLip));
+    lines.push(getCephalometryLine("EL", pogonionSoft, noseBase));
+    lines.push(getCephalometryLine("Ar-tgo", articulare, gonion));
+    lines.push(getCephalometryLine("S-Ba", sella, basion));
+    lines.push(getCephalometryLine("Gn-Pg", gnathion, pogonion));
+    lines.push(getCephalometryLine("Pg-B", pogonion, b));
+    lines.push(getCephalometryLine("ANS-A", spina, a));
     return lines;
-  },
+  }
+}
 
-  getLine(a, b) {
-    return {
-      ax: a.x,
-      ay: a.y,
-      bx: b.x,
-      by: b.y
-    };
-  },
+function getLine(a, b) {
+  return {
+    ax: a.x,
+    ay: a.y,
+    bx: b.x,
+    by: b.y
+  };
+}
 
-  getCephalometryLine(name, a, b,) {
-    return {
-      name: name,
-      line: this.getLine(a, b)
-    }
+function getCephalometryLine(name, a, b,) {
+  return {
+    name: name,
+    line: getLine(a, b)
   }
 }

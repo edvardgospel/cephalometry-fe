@@ -9,12 +9,12 @@
     </ul>
     <ul>
       <li
-        v-for="cephalometricDistance in cephalometricDistances"
+        v-for="cephalometricDistance in cephalometricDistancesInMillimeters"
         :key="cephalometricDistance.name"
-      >{{ cephalometricDistance.name }}: {{pixelToMillimeter(cephalometricDistance.distance).toFixed(1)}} mm</li>
+      >{{ cephalometricDistance.name }}: {{cephalometricDistance.distance.toFixed(1)}} mm</li>
       <li>
-        Index: {{(pixelToMillimeter(cephalometricDistances[cephalometricDistances.length-2].distance).toFixed(1) /
-        pixelToMillimeter(cephalometricDistances[cephalometricDistances.length-1].distance).toFixed(1) * 100).toFixed(1)}}%
+        Index: {{(cephalometricDistancesInMillimeters[cephalometricDistances.length-2].distance /
+        cephalometricDistancesInMillimeters[cephalometricDistances.length-1].distance * 100).toFixed(1)}}%
       </li>
     </ul>
     <ul>
@@ -42,6 +42,11 @@ export default {
   },
   mounted() {
     this.height = document.getElementById("infoBox").clientHeight;
+    this.$store.commit("SET_CEPHALOMETRY_ANGLES", this.cephalometricAngles);
+    this.$store.commit(
+      "SET_CEPHALOMETRY_DISTANCES_IN_MM",
+      this.cephalometricDistancesInMillimeters
+    );
   },
   computed: {
     cephalometricAngles() {
@@ -53,6 +58,16 @@ export default {
       return DistanceCalculator.getDistances(
         this.$store.getters.CEPHALOMETRY_COORDINATES
       );
+    },
+    cephalometricDistancesInMillimeters() {
+      var distancesInMM = [];
+      for (let distance of this.cephalometricDistances) {
+        distancesInMM.push({
+          name: distance.name,
+          distance: this.pixelToMillimeter(distance.distance),
+        });
+      }
+      return distancesInMM;
     },
     growthForecast() {
       return this.$store.getters.GROWTH_FORECAST;

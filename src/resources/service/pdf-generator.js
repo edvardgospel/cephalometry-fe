@@ -17,7 +17,7 @@ export default {
     pdf.setTextColor("#2c3e50");
     pdf.setDrawColor("#2c3e50");
     pdf.setFontSize(22);
-    pdf.text("Cephalometry", currentWidth, currentHeight, "center");
+    pdf.text("Cephalometrify", currentWidth, currentHeight, "center");
 
 
     //// Personal data ////

@@ -158,7 +158,6 @@ export default {
   margin: 0 auto;
   overflow: hidden;
   border: 1px solid #dddddd;
-  border-radius: 5px;
 }
 
 form {

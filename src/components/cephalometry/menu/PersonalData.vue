@@ -1,14 +1,38 @@
 <template>
-  <div class="personal-data-content-div">
+  <div class="personal-data-content-div-2">
     <ul>
-      <li>Name: {{personalData.name}}</li>
-      <li>Address: {{personalData.address}}</li>
-      <li>Gender: {{personalData.gender}}</li>
-      <li>Phone: {{personalData.phone}}</li>
-      <li>Doctor: {{personalData.doctor}}</li>
-      <li>Birthdate: {{personalData.birthDate}}</li>
-      <li>X-ray date: {{personalData.xRayDate}}</li>
-      <li>Remarks: {{personalData.remarks}}</li>
+      <li>
+        <b>Name:</b>
+        {{personalData.name}}
+      </li>
+      <li>
+        <b>Address:</b>
+        {{personalData.address}}
+      </li>
+      <li>
+        <b>Gender:</b>
+        {{personalData.gender}}
+      </li>
+      <li>
+        <b>Phone:</b>
+        {{personalData.phone}}
+      </li>
+      <li>
+        <b>Doctor:</b>
+        {{personalData.doctor}}
+      </li>
+      <li>
+        <b>Birthdate:</b>
+        {{personalData.birthDate}}
+      </li>
+      <li>
+        <b>X-ray date:</b>
+        {{personalData.xRayDate}}
+      </li>
+      <li>
+        <b>Remarks:</b>
+        {{personalData.remarks}}
+      </li>
     </ul>
   </div>
 </template>
@@ -25,19 +49,10 @@ export default {
 </script>
 
 <style scoped>
-.personal-data-content-div {
+.personal-data-content-div-2 {
   height: 100%;
   width: 100%;
-  margin: 0 auto;
-}
-
-.menu-div {
-  position: relative;
-  height: 90%;
-  width: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-  border: 1px solid #dddddd;
+  margin: 2rem auto;
 }
 
 ul {

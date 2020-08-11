@@ -36,7 +36,7 @@
           <input
             type="text"
             class="form-input"
-            :class="{red: (birthDate.length===10 && !isDateMatchesRegex(birthDate)) || (isAllInputFilled && !isDateMatchesRegex(birthDate))}"
+            :class="{red: birthDate.length===10 && isAllInputFilled &&  !isDateMatchesRegex(birthDate)}"
             v-model="birthDate"
             placeholder="Birthdate                                                  (yyyy.mm.dd)"
             maxlength="10"
@@ -44,7 +44,7 @@
           <input
             type="text"
             class="form-input"
-            :class="{red: (xRayDate.length===10 && !isDateMatchesRegex(xRayDate)) || (isAllInputFilled && !isDateMatchesRegex(xRayDate))}"
+            :class="{red: xRayDate.length===10 && isAllInputFilled && !isDateMatchesRegex(xRayDate)}"
             v-model="xRayDate"
             placeholder="X-Ray date                                               (yyyy.mm.dd)"
             maxlength="10"

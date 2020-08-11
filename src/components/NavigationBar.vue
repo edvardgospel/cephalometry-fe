@@ -2,7 +2,7 @@
   <div class="nav-bar">
     <div class="inner-nav-bar">
       <div class="logo-div">
-        <span>Cephalometry</span>
+        <span>Cephalometrify</span>
       </div>
     </div>
   </div>

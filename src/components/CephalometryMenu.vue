@@ -17,7 +17,7 @@
           class="meta-elements-span"
           :class="{'meta-elements-span-active': currentComponent  === 'AngleTable'}"
           @click="currentComponent = 'AngleTable'"
-        >Angles</span>
+        >Data</span>
         <span
           class="meta-elements-span"
           :class="{'meta-elements-span-active': currentComponent  === 'HarmonyTable'}"

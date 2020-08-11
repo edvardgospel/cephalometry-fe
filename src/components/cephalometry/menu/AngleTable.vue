@@ -1,32 +1,69 @@
 <template>
   <div class="angle-table-content-div">
     <div id="infoBox" ref="infoBox" style="height: 100mm; position:absolute; left:-999em;"></div>
-    <ul>
-      <li
-        v-for="cephalometricAngle in cephalometricAngles"
-        :key="cephalometricAngle.name"
-      >{{ cephalometricAngle.name }}: {{cephalometricAngle.angle.toFixed(1)}}°</li>
-    </ul>
-    <ul>
-      <li
-        v-for="cephalometricDistance in cephalometricDistancesInMillimeters"
-        :key="cephalometricDistance.name"
-      >{{ cephalometricDistance.name }}: {{cephalometricDistance.distance.toFixed(1)}} mm</li>
-      <li>
-        Index: {{(cephalometricDistancesInMillimeters[cephalometricDistances.length-2].distance /
-        cephalometricDistancesInMillimeters[cephalometricDistances.length-1].distance * 100).toFixed(1)}}%
-      </li>
-    </ul>
-    <ul>
-      <li>Modified ANB: {{growthForecast.newANB}}°</li>
-      <li>Modified ML-NL: {{growthForecast.newMLNL}}°</li>
-      <li>Modified N: {{growthForecast.newN}}°</li>
-    </ul>
-    <ul>
-      <li>Condylus: {{growthForecast.condyl}}</li>
-      <li>Canalis mandibula: {{growthForecast.canalisMand}}</li>
-      <li>Mandibula: {{growthForecast.mandibula}}</li>
-    </ul>
+    <div class="table-content-left-div">
+      <ul>
+        <li>
+          <span>
+            <b>Angles:</b>
+          </span>
+        </li>
+        <li v-for="cephalometricAngle in cephalometricAngles" :key="cephalometricAngle.name">
+          <b>{{ cephalometricAngle.name }}: </b>{{cephalometricAngle.angle.toFixed(1)}}°
+        </li>
+      </ul>
+    </div>
+    <div class="table-content-right-div">
+      <ul>
+        <li>
+          <span>
+            <b>Distances:</b>
+          </span>
+        </li>
+        <li
+          v-for="cephalometricDistance in cephalometricDistancesInMillimeters"
+          :key="cephalometricDistance.name"
+        >
+          <b>{{ cephalometricDistance.name }}: </b>{{cephalometricDistance.distance.toFixed(1)}} mm
+        </li>
+        <li>
+          <b>Index:</b>
+          {{(cephalometricDistancesInMillimeters[cephalometricDistances.length-2].distance /
+          cephalometricDistancesInMillimeters[cephalometricDistances.length-1].distance * 100).toFixed(1)}}%
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <span>
+            <b>Growth forecast:</b>
+          </span>
+        </li>
+        <li>
+          <b>Modified ANB:</b>
+          {{growthForecast.newANB}}°
+        </li>
+        <li>
+          <b>Modified ML-NL:</b>
+          {{growthForecast.newMLNL}}°
+        </li>
+        <li>
+          <b>Modified N:</b>
+          {{growthForecast.newN}}°
+        </li>
+        <li>
+          <b>Condylus:</b>
+          {{growthForecast.condyl}}
+        </li>
+        <li>
+          <b>Canalis mandibula:</b>
+          {{growthForecast.canalisMand}}
+        </li>
+        <li>
+          <b>Mandibula:</b>
+          {{growthForecast.mandibula}}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -87,10 +124,30 @@ export default {
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  overflow: scroll;
+}
+
+.table-content-left-div,
+.table-content-right-div {
+  height: 100%;
+  width: 50%;
+  margin: 1rem auto;
+}
+
+.table-content-left-div {
+  float: left;
+}
+
+.table-content-right-div {
+  float: right;
 }
 
 ul {
   list-style-type: none;
+}
+
+span {
+  display: inline-block;
+  font-size: 1.1rem;
+  margin-bottom: 3px;
 }
 </style>

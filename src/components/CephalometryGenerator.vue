@@ -61,7 +61,7 @@ export default {
         "B",
         "Pg",
         "Gn",
-        "tgo",
+        "Go",
         "Ar",
         "Pg soft",
         "UL",

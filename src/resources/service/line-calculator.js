@@ -16,7 +16,7 @@ export default {
     let apicaleSuperius = cephalometryCoordinates.find(coord => coord.name === "UIA");
     let incisionInferius = cephalometryCoordinates.find(coord => coord.name === "LI");
     let apicaleInferius = cephalometryCoordinates.find(coord => coord.name === "LIA");
-    let pogonionSoft = cephalometryCoordinates.find(coord => coord.name === "Pg soft");
+    let pogonionSoft = cephalometryCoordinates.find(coord => coord.name === "Pg'");
     let upperLip = cephalometryCoordinates.find(coord => coord.name === "UL");
     let noseBase = cephalometryCoordinates.find(coord => coord.name === "Tang")
 

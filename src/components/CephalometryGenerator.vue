@@ -63,7 +63,7 @@ export default {
         "Gn",
         "Go",
         "Ar",
-        "Pg soft",
+        "Pg'",
         "UL",
         "Sn",
         "Tang",

@@ -243,7 +243,7 @@ export default {
   cursor: default;
   display: inline-block;
   text-align: center;
-  width: 51px;
+  width: 35px;
 }
 
 .generate-button-div {

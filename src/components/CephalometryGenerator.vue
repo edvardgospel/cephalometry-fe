@@ -61,13 +61,13 @@ export default {
         "B",
         "Pg",
         "Gn",
-        "tgo",
+        "Go",
         "Ar",
-        "Pg soft",
+        "Pg'",
         "UL",
         "Sn",
-        "Tang",
-        "N soft",
+        "Prn",
+        "N'",
       ],
       cephalometryCoordinates: [],
       index: 0,
@@ -101,9 +101,9 @@ export default {
       div.style.position = "absolute";
       div.style.top = event.offsetY + "px";
       div.style.left = event.offsetX + "px";
-      div.style.width = "1px";
-      div.style.height = "1px";
-      div.style.backgroundColor = "yellow";
+      div.style.width = "2px";
+      div.style.height = "2px";
+      div.style.backgroundColor = "red";
       div.style.cursor = "crosshair";
       document.getElementById("inner-image-div-id").appendChild(div);
     },
@@ -243,7 +243,7 @@ export default {
   cursor: default;
   display: inline-block;
   text-align: center;
-  width: 51px;
+  width: 35px;
 }
 
 .generate-button-div {

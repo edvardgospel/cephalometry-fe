@@ -8,7 +8,7 @@ export default {
     let pogonion = cephalometryCoordinates.find(coord => coord.name === "Pg");
     let gnathion = cephalometryCoordinates.find(coord => coord.name === "Gn");
     let basion = cephalometryCoordinates.find(coord => coord.name === "Ba");
-    let gonion = cephalometryCoordinates.find(coord => coord.name === "tgo");
+    let gonion = cephalometryCoordinates.find(coord => coord.name === "Go");
     let articulare = cephalometryCoordinates.find(coord => coord.name === "Ar");
     let pterygomaxillare = cephalometryCoordinates.find(coord => coord.name === "PNS");
     let spina = cephalometryCoordinates.find(coord => coord.name === "ANS");
@@ -16,7 +16,7 @@ export default {
     let apicaleSuperius = cephalometryCoordinates.find(coord => coord.name === "UIA");
     let incisionInferius = cephalometryCoordinates.find(coord => coord.name === "LI");
     let apicaleInferius = cephalometryCoordinates.find(coord => coord.name === "LIA");
-    let pogonionSoft = cephalometryCoordinates.find(coord => coord.name === "Pg soft");
+    let pogonionSoft = cephalometryCoordinates.find(coord => coord.name === "Pg'");
     let upperLip = cephalometryCoordinates.find(coord => coord.name === "UL");
 
     angles.push(getCephalometryAngle("SNA", nasion, a, nasion, sella));
@@ -29,7 +29,7 @@ export default {
     angles.push(getCephalometryAngle("SNPg", nasion, pogonion, nasion, sella));
     angles.push(getCephalometryAngle("SNGn", nasion, gnathion, nasion, sella));
     angles.push(getCephalometryAngle("NSBa", sella, nasion, sella, basion));
-    angles.push(getCephalometryAngle("Gn-tgo-Ar", gonion, articulare, gonion, gnathion));
+    angles.push(getCephalometryAngle("Gn-Go-Ar", gonion, articulare, gonion, gnathion));
     angles.push(getCephalometryAngle("N", gnathion, gonion, pogonion, b));
     angles.push(getCephalometryAngle("NL-NSL",  sella, nasion,pterygomaxillare, spina));
     angles.push(getCephalometryAngle("ML-NSL", sella, nasion, gonion, gnathion));
@@ -54,7 +54,7 @@ export default {
 
   getMLNL(cephalometryCoordinates) {
     let gnathion = cephalometryCoordinates.find(coord => coord.name === "Gn");
-    let gonion = cephalometryCoordinates.find(coord => coord.name === "tgo");
+    let gonion = cephalometryCoordinates.find(coord => coord.name === "Go");
     let pterygomaxillare = cephalometryCoordinates.find(coord => coord.name === "PNS");
     let spina = cephalometryCoordinates.find(coord => coord.name === "ANS");
     return getCephalometryAngle("ML-NL", pterygomaxillare, spina, gonion, gnathion).angle;
@@ -65,7 +65,7 @@ export default {
     let b = cephalometryCoordinates.find(coord => coord.name === "B");
     let pogonion = cephalometryCoordinates.find(coord => coord.name === "Pg");
     let gnathion = cephalometryCoordinates.find(coord => coord.name === "Gn");
-    let gonion = cephalometryCoordinates.find(coord => coord.name === "tgo");
+    let gonion = cephalometryCoordinates.find(coord => coord.name === "Go");
     return getCephalometryAngle("N", gnathion, gonion, pogonion, b).angle;
   }
 }

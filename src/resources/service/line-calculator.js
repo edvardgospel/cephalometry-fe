@@ -18,7 +18,7 @@ export default {
     let apicaleInferius = cephalometryCoordinates.find(coord => coord.name === "LIA");
     let pogonionSoft = cephalometryCoordinates.find(coord => coord.name === "Pg'");
     let upperLip = cephalometryCoordinates.find(coord => coord.name === "UL");
-    let noseBase = cephalometryCoordinates.find(coord => coord.name === "Tang")
+    let noseBase = cephalometryCoordinates.find(coord => coord.name === "Prn")
 
     lines.push(getCephalometryLine("NSL", nasion, sella));
     lines.push(getCephalometryLine("NL", pterygomaxillare, spina));

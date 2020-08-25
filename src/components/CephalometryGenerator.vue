@@ -67,7 +67,7 @@ export default {
         "UL",
         "Sn",
         "Prn",
-        "N soft",
+        "N'",
       ],
       cephalometryCoordinates: [],
       index: 0,

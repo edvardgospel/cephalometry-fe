@@ -103,7 +103,7 @@ export default {
       div.style.left = event.offsetX + "px";
       div.style.width = "2px";
       div.style.height = "2px";
-      div.style.backgroundColor = "yellow";
+      div.style.backgroundColor = "red";
       div.style.cursor = "crosshair";
       document.getElementById("inner-image-div-id").appendChild(div);
     },

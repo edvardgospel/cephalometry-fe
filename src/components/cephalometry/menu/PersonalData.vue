@@ -57,5 +57,6 @@ export default {
 
 ul {
   list-style-type: none;
+  padding-right: 40px;
 }
 </style>

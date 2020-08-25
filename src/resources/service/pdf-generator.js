@@ -83,7 +83,7 @@ export default {
       }
     }
     pdf.text(`Index: ${(distances[distances.length - 2].distance / distances[distances.length - 1].distance * 100).toFixed(1)}%`,
-      currentWidth, currentHeight += 5); //TODO!!
+      currentWidth, currentHeight += 5); //TODO
 
 
     //// Growth forecast ////
@@ -110,7 +110,13 @@ export default {
       pdf.addPage();
       imageHeight = imageWidth * canvas[1].height / canvas[1].width;
       pdf.addImage(canvas[1], "JPEG", 30, 10, imageWidth, imageHeight);
-      pdf.text(`Remarks: ${personalData.remarks ? personalData.remarks : "-"}`, 20, imageHeight + 20);
+      if (!personalData.remarks) {
+        pdf.text("Remarks: -", 20, imageHeight + 20);
+      } else {
+        const remarks = "Remarks: " + personalData.remarks;
+        const splittedRemarks = pdf.splitTextToSize(remarks, pageWidth - 40);
+        pdf.text(splittedRemarks, 20, imageHeight + 20);
+      }
       pdf.save(personalData.name.replace(" ", "_") + "_" + personalData.xRayDate + ".pdf");
     });
   }

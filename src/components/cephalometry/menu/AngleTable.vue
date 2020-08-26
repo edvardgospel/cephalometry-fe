@@ -55,7 +55,7 @@
           {{growthForecast.condyl}}
         </li>
         <li>
-          <b>Canalis mandibula:</b>
+          <b>Canalis mandibulae:</b>
           {{growthForecast.canalisMand}}
         </li>
         <li>

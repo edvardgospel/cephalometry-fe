@@ -95,7 +95,7 @@ export default {
     pdf.text(`Modified ML-NL: ${growthForecast.newMLNL}°`, currentWidth, currentHeight += 5);
     pdf.text(`Modified N: ${growthForecast.newN}°`, currentWidth, currentHeight += 5);
     pdf.text(`Condylus: ${growthForecast.condyl}`, currentWidth, currentHeight += 5);
-    pdf.text(`Canalis mandibula: ${growthForecast.canalisMand}`, currentWidth, currentHeight += 5);
+    pdf.text(`Canalis mandibulae: ${growthForecast.canalisMand}`, currentWidth, currentHeight += 5);
     pdf.text(`Mandibula: ${growthForecast.mandibula}`, currentWidth, currentHeight += 5);
 
 

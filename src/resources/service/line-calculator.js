@@ -23,9 +23,9 @@ export default {
     lines.push(getCephalometryLine("NSL", nasion, sella));
     lines.push(getCephalometryLine("NL", pterygomaxillare, spina));
     lines.push(getCephalometryLine("ML", gnathion, gonion));
-    //lines.push(getCephalometryLine("NAL", nasion, a));
-    //lines.push(getCephalometryLine("NBL", nasion, b));
-    //lines.push(getCephalometryLine("NPgL", nasion, pogonion));
+    lines.push(getCephalometryLine("NAL", nasion, a));
+    lines.push(getCephalometryLine("NBL", nasion, b));
+    lines.push(getCephalometryLine("NPgL", nasion, pogonion));
     lines.push(getCephalometryLine("I", incisionSuperius, apicaleSuperius));
     lines.push(getCephalometryLine("Ī", incisionInferius, apicaleInferius));
     lines.push(getCephalometryLine("HL", pogonionSoft, upperLip));
